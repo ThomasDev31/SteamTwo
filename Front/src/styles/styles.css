@@ -1,0 +1,16 @@
+.all_games{
+    max-width: 1220px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+    .game{
+        .container_img{
+            max-width: 200px;
+        }
+        img{
+            object-fit: contain;
+
+        }
+    }
+}

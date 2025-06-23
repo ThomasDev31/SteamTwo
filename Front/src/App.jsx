@@ -1,11 +1,21 @@
 import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router";
 import AllGames from './components/Allgames'
+import Header from './layout/Header'
+import Game from './components/Game';
+import Error404 from'./layout/Error404';
 function App() {
-
 
   return (
     <>
-      <AllGames />
+    <BrowserRouter>
+    <Header/>
+      <Routes>
+        <Route path="/" element={<AllGames />}/>
+        <Route path={`/game/:id`} element={<Game />}/>
+        <Route path='*' element={<Error404 />}/>
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }

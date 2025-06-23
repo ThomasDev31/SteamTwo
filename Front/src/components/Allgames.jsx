@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-const keyApi = import.meta.env.VITE_KEY;
 import '../styles/styles.css'
-
+import { Link } from "react-router";
+import Header from "../layout/Header";
 
 function AllGames() {
     const [data, setData] = useState([]);
@@ -36,15 +36,16 @@ function AllGames() {
                 
                 {data.results && data.results.map((game) => (
                     <div key={game.id} className="game" >
-                        <h2>{game.name}</h2>
+                        
                         <div className="container_img">
                             <img src={game.background_image} alt="image du jeu" />
                         </div>
-                        
-                        <div>
+                        <h2>{game.name}</h2>
+                        <Link to={`game/${game.id}`}>Voir plus d'informations</Link>
+                        <div className="platform_game">
                             {game.parent_platforms &&
                                 game.parent_platforms.map((plat) => (
-                                    <div key={plat.platform.id}>
+                                    <div key={plat.platform.id} >
                                         {plat.platform.slug === "pc" && (
                                             <i className="fa-brands fa-windows"></i>
                                         )}
@@ -55,6 +56,22 @@ function AllGames() {
                                         {plat.platform.slug === "xbox" && (
                                             <i className="fa-brands fa-xbox"></i>
                                         )}
+                                        {plat.platform.slug === "linux" && (
+                                            <i className="fa-brands fa-linux"></i>
+                                        )}
+                                        {plat.platform.slug === "mac" && (
+                                            <i className="fa-brands fa-apple"></i>
+                                        )}
+                                        {plat.platform.slug === "nintendo" && (
+                                            <i className="fa-solid fa-gamepad"></i>
+                                        )}
+                                        {plat.platform.slug === "ios" && (
+                                            <i class="fa-brands fa-app-store-ios"></i>
+                                        )}
+                                        {plat.platform.slug === "android" && (
+                                            <i class="fa-brands fa-android"></i>
+                                        )}
+                                        
                                     </div>
                                 ))}
                         </div>
@@ -68,8 +85,4 @@ function AllGames() {
 }
 
 export default AllGames;
-{
-    /* <i class="fa-brands fa-playstation"></i>
-<i class="fa-brands fa-xbox"></i>
-<i class="fa-brands fa-windows"></i> */
-}
+

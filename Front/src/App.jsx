@@ -1,12 +1,12 @@
 
 import './App.css'
-
+import AllGames from './components/Allgames'
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-
+      <AllGames />
     </>
   )
 }

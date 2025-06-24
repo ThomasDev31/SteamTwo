@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import rawgQueries from '../api/rawgQueries';
+import rawgCalls from '../api/rawgCalls';
 
 function Test (){
     const [datas, setDatas] = useState([])
     const fetchdata=  async() => {
-        const responses = await rawgQueries.getAllGamesByCategory("action", 1);
+        const responses = await rawgCalls.getAllGames();
     
            
        setDatas(responses)
@@ -13,7 +13,7 @@ function Test (){
       fetchdata()
     },[])
 
-    return (console.log(datas))
+    return (console.log(datas.gameData.results))
 }
 
 export default Test;

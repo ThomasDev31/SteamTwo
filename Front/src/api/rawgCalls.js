@@ -1,3 +1,6 @@
+const apiKey = import.meta.env.VITE_KEY;
+
+
 const rawgCalls = {
 
 	/*
@@ -6,7 +9,7 @@ const rawgCalls = {
    */
 	async getAllGames(nbPage = 1) {
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&page=${nbPage}`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&page=${nbPage}`);
 			if (!response.ok) {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
@@ -29,7 +32,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -45,7 +48,7 @@ const rawgCalls = {
 	*/
 	async getGame(gameId) {
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games/${gameId}?key=192c02abeefe448e8434a0b1a68694d7`);
+			const response = await fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
@@ -86,7 +89,7 @@ const rawgCalls = {
 
 			}
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -102,7 +105,7 @@ const rawgCalls = {
 	*/
 	async getGameBySearch(name, nbPage = 1) {
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&search=${name}&page=${nbPage}`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${name}&page=${nbPage}`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
@@ -126,7 +129,7 @@ const rawgCalls = {
 	*/
 	async getGameMovies(gameId) {
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games/${gameId}/movies?key=192c02abeefe448e8434a0b1a68694d7`);
+			const response = await fetch(`https://api.rawg.io/api/games/${gameId}/movies?key=${apiKey}`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
@@ -154,7 +157,7 @@ const rawgCalls = {
 		const startYear = `${year}-01-01`;
 		const endYear = `${year}-12-31`;
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${startYear},${endYear}&ordering=metacritic${nbPage}`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${startYear},${endYear}&ordering=metacritic${nbPage}`);
 			if (!response.ok) {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
@@ -178,7 +181,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -197,7 +200,7 @@ const rawgCalls = {
 		const startYear = `${year}-01-01`;
 		const endYear = `${year}-12-31`;
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${startYear},${endYear}&ordering=rating${nbPage}`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${startYear},${endYear}&ordering=rating${nbPage}`);
 			if (!response.ok) {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
@@ -221,7 +224,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -237,7 +240,7 @@ const rawgCalls = {
 	async getAllGamesBestOfTime(nbPage = 1) {
 
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&ordering=metacritic${nbPage}`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=metacritic${nbPage}`);
 			if (!response.ok) {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
@@ -261,7 +264,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -279,7 +282,7 @@ const rawgCalls = {
 	*/
 	async getAllGamesByPlatform(platform, nbPage = 1) {
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&parent_platforms=${platform}&page=${nbPage}&page_size=20`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&parent_platforms=${platform}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
@@ -303,7 +306,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -322,7 +325,7 @@ const rawgCalls = {
 	*/
 	async getAllGamesByCategory(category, nbPage = 1) {
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&genres=${category}&page=${nbPage}&page_size=20`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&genres=${category}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
@@ -347,7 +350,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -370,7 +373,7 @@ const rawgCalls = {
 		const formatingDate = (date) => date.toISOString().split('T')[0]
 
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(thirtyDay)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${formatingDate(thirtyDay)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
@@ -395,7 +398,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -417,7 +420,7 @@ const rawgCalls = {
 		const formatingDate = (date) => date.toISOString().split('T')[0]
 
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
@@ -441,7 +444,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -463,7 +466,7 @@ const rawgCalls = {
 		const formatingDate = (date) => date.toISOString().split('T')[0]
 
 		try {
-			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
+			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
 				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
@@ -487,7 +490,7 @@ const rawgCalls = {
 				price: generateRandomPrice()
 			}))
 
-			return { result, error: null };
+			return [ result , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)

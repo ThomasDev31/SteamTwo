@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import '../styles/styles.css'
 import { useParams } from "react-router";
 
@@ -10,7 +9,7 @@ function Game() {
     const [loading, setLoading] = useState(true);
     const {id} = useParams();
 
-    const fetchDatas = async () => {
+    const fetchGame = async () => {
         try {
             const response = await fetch(
                 `https://api.rawg.io/api/games/${id}?key=192c02abeefe448e8434a0b1a68694d7`
@@ -29,13 +28,16 @@ function Game() {
     };
 
     useEffect(() => {
-        fetchDatas();
+        fetchGame();
     }, []);
+
     console.log(data)
+
     return (
         <>
-            <div>
-                test
+            <div className="game">
+                
+             
             </div>
         </>
     );

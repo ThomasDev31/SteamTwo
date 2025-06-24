@@ -10,7 +10,6 @@ const Main = () => {
 	const [datas, setDatas] = useState([]);
 	const fetchdata = async () => {
 		const responses = await rawgCalls.getAllGames();
-		console.log(responses);
 		setDatas(responses);
 	};
 	useEffect(() => {

@@ -14,7 +14,13 @@ const rawgQueries = {
                 throw new Error(`Erreur sur la requête pour la catégorie  (statut : ${response.status})`);
             }
             const categoryData = await response.json();
-            return categoryData.results;
+            
+            const result = categoryData.results.map(r => ({
+                 id : r.id, 
+                 name :r.name, 
+                 slug: r.slug 
+            }))
+            return result ;
         } catch (error) {
             console.error("Erreur dans getByCategory :", error.message);
             throw error;
@@ -28,13 +34,17 @@ const rawgQueries = {
     */
     async getPlatform() {
         try {
-            const response = await fetch(`https://api.rawg.io/api/platforms/lists/parents?key=192c02abeefe448e8434a0b1a68694d7`)
+            const response = await fetch(`https://api.rawg.io/api/platforms/lists/parents?key=192c02abeefe448e8434a0b1a68694d7&page_size=8`)
             if (!response.ok) {
                 throw new Error(`Erreur sur la requete pour la platforme (${response.status})`)
             }
             const platformData = await response.json();
-            
-            return platformData.results;
+            const result = platformData.results.map(r => ({
+                 id : r.id, 
+                 name :r.name, 
+                 slug: r.slug 
+            }))
+            return result;
         } catch (error) {
             console.error("Erreur dans getByPlatform : ", error.message);
             throw error;
@@ -48,13 +58,17 @@ const rawgQueries = {
     */
     async getTags() {
         try {
-            const response = await fetch(`https://api.rawg.io/api/platforms/lists/parents?key=192c02abeefe448e8434a0b1a68694d7`)
+            const response = await fetch(`https://api.rawg.io/api/tags?key=192c02abeefe448e8434a0b1a68694d7`)
             if (!response.ok) {
                 throw new Error(`Erreur sur la requete pour la platforme (${response.status})`)
             }
-            const platformData = await response.json();
-            
-            return platformData.results;
+            const tagsData = await response.json();
+            const result = tagsData.results.map(r => ({
+                 id : r.id, 
+                 name :r.name, 
+                 slug: r.slug 
+            }))
+            return result;
         } catch (error) {
             console.error("Erreur dans getByPlatform : ", error.message);
             throw error;

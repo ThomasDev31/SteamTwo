@@ -2,7 +2,7 @@ const rawgCalls = {
 
 	/*
    * Get all Games 
-   * @return{promise} results of all games
+   * @return{promise} results of all games (id, title, platform :[], price)
    */
 	async getAllGames(nbPage = 1) {
 		try {
@@ -11,10 +11,25 @@ const rawgCalls = {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
+			if (gameData.count === 0 || !gameData.results) {
 				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -35,10 +50,43 @@ const rawgCalls = {
 				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
+
+			if (!gameData.id) {
 				return { error: "Aucun jeu n'a été trouvé ", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const responseMovie = await this.getGameMovies(gameId);
+			
+			const result = {
+				id: gameData.id,
+				title: gameData.name,
+				platform: gameData.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				description: gameData.description_raw,
+				date: gameData.released,
+				stores: gameData.stores?.map(s => ({
+					id: s.store.id,
+					name: s.store.name,
+					slug: s.store.slug,
+					url: s.store.domain
+				})) || [],
+				tags: gameData.tags?.map(t => ({
+					id: t.id,
+					name: t.name,
+					slug: t.slug,
+				})),
+				developpers: gameData.developers?.map(d => ({
+					id: d.id,
+					name: d.name
+				})),
+				trailers: responseMovie.data.map(m => ({
+					id: m.id,
+					name: m.name,
+					preview: m.preview
+				}))
+
+			}
+
+			return { result, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -46,13 +94,13 @@ const rawgCalls = {
 		}
 	},
 
-	
+
 	/*
 	* Get game by search
 	* @params{name} name of game
 	* @return {promise} result of promise
 	*/
-	async getGameBySearch(name, nbPage=1) {
+	async getGameBySearch(name, nbPage = 1) {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&search=${name}&page=${nbPage}`);
 			if (!response.ok) {
@@ -86,7 +134,8 @@ const rawgCalls = {
 			if (gameData.count === 0) {
 				return { error: "Aucun jeu n'a été trouvé ", gameData: null };
 			}
-			return { gameData, error: null };
+			const data = gameData.results
+			return { data, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -110,10 +159,26 @@ const rawgCalls = {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
+
+			if (gameData.count === 0 || !gameData.results) {
 				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -137,10 +202,26 @@ const rawgCalls = {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
+
+			if (gameData.count === 0 || !gameData.results) {
 				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -148,7 +229,7 @@ const rawgCalls = {
 		}
 	},
 
-	
+
 	/*
    * Get all Games of all times
    * @return{promise} results of all games
@@ -161,10 +242,26 @@ const rawgCalls = {
 				throw new Error("Erreur sur la requete " + response.status);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
+
+			if (gameData.count === 0 || !gameData.results) {
 				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -188,10 +285,25 @@ const rawgCalls = {
 			}
 			const gameData = await response.json();
 
-			if (gameData.count === 0) {
-				return { error: "Aucun jeu trouvé pour cette platforme", gameData: null };
+			if (gameData.count === 0 || !gameData.results) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -216,17 +328,33 @@ const rawgCalls = {
 			}
 
 			const gameData = await response.json();
-			if (gameData.count === 0) {
 
-				return { error: "Aucun jeu trouvé pour cette catégorie", gameData: null };
+			if (gameData.count === 0 || !gameData.results) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
+
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
 			return { error: error.message, gameData: null };
 		}
 	},
-	
+
 
 
 	/*
@@ -239,7 +367,7 @@ const rawgCalls = {
 		const today = new Date();
 		const thirtyDay = new Date(today);
 		thirtyDay.setDate(today.getDate() - 30)
-		const formatingDate = (date)=> date.toISOString().split('T')[0]
+		const formatingDate = (date) => date.toISOString().split('T')[0]
 
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(thirtyDay)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
@@ -248,11 +376,27 @@ const rawgCalls = {
 			}
 
 			const gameData = await response.json();
-			if (gameData.count === 0) {
 
-				return { error: "Aucun n'a été trouvé", gameData: null };
+			if (gameData.count === 0 || !gameData.results) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
+
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
 			return { error: error.message, gameData: null };
@@ -270,7 +414,7 @@ const rawgCalls = {
 		const today = new Date();
 		const week = new Date(today);
 		week.setDate(today.getDate() - 7)
-		const formatingDate = (date)=> date.toISOString().split('T')[0]
+		const formatingDate = (date) => date.toISOString().split('T')[0]
 
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
@@ -278,11 +422,27 @@ const rawgCalls = {
 				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
 
-				return { error: "Aucun n'a été trouvé", gameData: null };
+			if (gameData.count === 0 || !gameData.results) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
+
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
 			return { error: error.message, gameData: null };
@@ -300,7 +460,7 @@ const rawgCalls = {
 		const today = new Date();
 		const week = new Date(today);
 		week.setDate(today.getDate() + 7)
-		const formatingDate = (date)=> date.toISOString().split('T')[0]
+		const formatingDate = (date) => date.toISOString().split('T')[0]
 
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
@@ -308,11 +468,27 @@ const rawgCalls = {
 				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
 			const gameData = await response.json();
-			if (gameData.count === 0) {
 
-				return { error: "Aucun n'a été trouvé", gameData: null };
+			if (gameData.count === 0 || !gameData.results) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
-			return { gameData, error: null };
+
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.50, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return (prices[randomIndex])
+
+			}
+
+			const result = gameData.results.map(r => ({
+				id: r.id,
+				title: r.name,
+				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
+				price: generateRandomPrice()
+			}))
+
+			return { result, error: null };
+
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
 			return { error: error.message, gameData: null };

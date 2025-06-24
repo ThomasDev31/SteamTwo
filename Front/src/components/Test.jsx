@@ -7,12 +7,12 @@ function Test() {
     const [datas2, setDatas2] = useState([]);
 
     const fetchdata = async () => {
-        const responses = await rawgCalls.getAllGamesMostPopularOfYear();
+        const responses = await rawgCalls.getGame('3498');
 
-        setDatas(responses.gameData.results);
+        setDatas(responses);
     };
     const fetchdatabis = async () => {
-        const responses = await rawgQueries.getCategory();
+        const responses = await rawgQueries.getTags();
       
         setDatas2(responses);
     };

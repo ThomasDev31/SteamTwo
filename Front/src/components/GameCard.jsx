@@ -60,8 +60,7 @@ export default GameCard;
 				)}
 				{plat.platform.slug === "android" && (
 					<i class="fa-brands fa-android"></i>
-				)}
-				
+				)}	
 			</div>
 		))}
 </div>

@@ -1,20 +1,23 @@
+import Main from "./components/Main";
 import Layout from "./layout/Layout";
 
-
 function App() {
-	return <Layout />;
+	return (
+		<>
+			<Layout />
+		</>
+	);
 }
 
-export default App
-
+export default App;
 
 // Last 30 days
 // This Week
-// Next 
+// Next
 
 // Best of year
-// popular in current year 
-// all time top 
+// popular in current year
+// all time top
 
 // PC
 // Play
@@ -23,11 +26,11 @@ export default App
 // IOS
 // Android
 
-// Action 
-// Strat 
-// RPG 
-// Shooter 
-// Adventure 
-// Puzzle 
-// Racing 
-// Sports 
+// Action
+// Strat
+// RPG
+// Shooter
+// Adventure
+// Puzzle
+// Racing
+// Sports

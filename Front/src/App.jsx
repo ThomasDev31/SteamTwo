@@ -1,25 +1,10 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router";
-import AllGames from './components/Allgames'
-import Header from './layout/Header'
-import Game from './components/Game';
-import Error404 from'./layout/Error404';
-function App() {
+import Layout from "./layout/Layout";
 
-  return (
-    <>
-    <BrowserRouter>
-    <Header/>
-      <Routes>
-        <Route path="/" element={<AllGames />}/>
-        <Route path={`/game/:id`} element={<Game />}/>
-        <Route path='*' element={<Error404 />}/>
-      </Routes>
-    </BrowserRouter>
-    </>
-  )
+function App() {
+	return <Layout />;
 }
 
+<<<<<<< HEAD
 export default App
 
 
@@ -46,3 +31,6 @@ export default App
 // Puzzle 
 // Racing 
 // Sports 
+=======
+export default App;
+>>>>>>> b1c4dc91a167fbdd40fc787d2ae0594a11da6844

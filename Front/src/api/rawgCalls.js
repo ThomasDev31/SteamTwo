@@ -56,7 +56,7 @@ const rawgCalls = {
 			}
 
 			const responseMovie = await this.getGameMovies(gameId);
-			
+
 			const result = {
 				id: gameData.id,
 				title: gameData.name,
@@ -74,7 +74,7 @@ const rawgCalls = {
 					name: t.name,
 					slug: t.slug,
 				})),
-				developpers: gameData.developers?.map(d => ({
+				developers: gameData.developers?.map(d => ({
 					id: d.id,
 					name: d.name
 				})),

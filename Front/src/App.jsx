@@ -1,10 +1,10 @@
 import Layout from "./layout/Layout";
 
+
 function App() {
 	return <Layout />;
 }
 
-<<<<<<< HEAD
 export default App
 
 
@@ -31,6 +31,3 @@ export default App
 // Puzzle 
 // Racing 
 // Sports 
-=======
-export default App;
->>>>>>> b1c4dc91a167fbdd40fc787d2ae0594a11da6844

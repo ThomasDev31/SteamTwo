@@ -15,6 +15,7 @@ const Layout = () => {
 
 const StyledLayout = styled.div`
 	background-color: black;
+	min-height: 100vh;
 	color: white;
 `;
 

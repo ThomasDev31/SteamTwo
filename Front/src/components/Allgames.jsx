@@ -29,6 +29,7 @@ function AllGames() {
     useEffect(() => {
         fetchDatas();
     }, []);
+    
     console.log(data)
     return (
         <>

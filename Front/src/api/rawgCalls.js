@@ -1,5 +1,7 @@
 const rawgCalls = {
-	getAllCards() {},
-	getCardsByCategory() {},
+	async getAllCards() {},
+	getCardsByCategory(category) {},
 	getCardById() {},
 };
+
+export default rawgCalls;

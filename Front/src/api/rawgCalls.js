@@ -1,6 +1,5 @@
 const rawgCalls = {
 
-
 	/*
    * Get all Games 
    * @return{promise} results of all games
@@ -13,7 +12,7 @@ const rawgCalls = {
 			}
 			const gameData = await response.json();
 			if (gameData.count === 0) {
-				return { error: "Aucun jeu trouvé pour cette catégorie", gameData: null };
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}
 			return { gameData, error: null };
 
@@ -33,11 +32,11 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games/${gameId}?key=192c02abeefe448e8434a0b1a68694d7`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id ${platform} + (${response.status})`);
+				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
 			const gameData = await response.json();
 			if (gameData.count === 0) {
-				return { error: "Aucun jeu trouvé pour cette catégorie", gameData: null };
+				return { error: "Aucun jeu n'a été trouvé ", gameData: null };
 			}
 			return { gameData, error: null };
 
@@ -46,6 +45,133 @@ const rawgCalls = {
 			return { error: error.message, gameData: null };
 		}
 	},
+
+	
+	/*
+	* Get game by search
+	* @params{name} name of game
+	* @return {promise} result of promise
+	*/
+	async getGameBySearch(name, nbPage=1) {
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&search=${name}&page=${nbPage}`);
+			if (!response.ok) {
+				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+				return { error: "Aucun jeu n'a été trouvé ", gameData: null };
+			}
+			return { gameData, error: null };
+
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
+
+	/*
+	* Get Trailers of game
+	* @params{gameId} id game
+	* @return {promise} result of promise
+	*/
+	async getGameMovies(gameId) {
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games/${gameId}/movies?key=192c02abeefe448e8434a0b1a68694d7`);
+			if (!response.ok) {
+				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+				return { error: "Aucun jeu n'a été trouvé ", gameData: null };
+			}
+			return { gameData, error: null };
+
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
+
+	/*
+   * Get best games of year
+   * @return{promise} results of all games
+   */
+	async getAllGamesBestOfYear(nbPage = 1) {
+
+		const year = new Date().getFullYear();
+		const startYear = `${year}-01-01`;
+		const endYear = `${year}-12-31`;
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${startYear},${endYear}&ordering=metacritic${nbPage}`);
+			if (!response.ok) {
+				throw new Error("Erreur sur la requete " + response.status);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
+			}
+			return { gameData, error: null };
+
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
+
+	/*
+   * Get best games of year
+   * @return{promise} results of all games
+   */
+	async getAllGamesMostPopularOfYear(nbPage = 1) {
+
+		const year = new Date().getFullYear();
+		const startYear = `${year}-01-01`;
+		const endYear = `${year}-12-31`;
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${startYear},${endYear}&ordering=rating${nbPage}`);
+			if (!response.ok) {
+				throw new Error("Erreur sur la requete " + response.status);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
+			}
+			return { gameData, error: null };
+
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
+	
+	/*
+   * Get all Games of all times
+   * @return{promise} results of all games
+   */
+	async getAllGamesBestOfTime(nbPage = 1) {
+
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&ordering=metacritic${nbPage}`);
+			if (!response.ok) {
+				throw new Error("Erreur sur la requete " + response.status);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+				return { error: "Aucun jeux n'a été trouvés", gameData: null };
+			}
+			return { gameData, error: null };
+
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
 
 
 	/*
@@ -58,12 +184,12 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&parent_platforms=${platform}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id ${platform} + (${response.status})`);
+				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
 			}
 			const gameData = await response.json();
 
 			if (gameData.count === 0) {
-				return { error: "Aucun jeu trouvé pour cette catégorie", gameData: null };
+				return { error: "Aucun jeu trouvé pour cette platforme", gameData: null };
 			}
 			return { gameData, error: null };
 
@@ -73,6 +199,7 @@ const rawgCalls = {
 		}
 
 	},
+
 
 
 	/*
@@ -85,7 +212,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&genres=${category}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id ${category} + (${response.status})`);
+				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
 			}
 
 			const gameData = await response.json();
@@ -99,6 +226,97 @@ const rawgCalls = {
 			return { error: error.message, gameData: null };
 		}
 	},
+	
 
+
+	/*
+	* Get all game by month
+	* @params{nbPages} value of page
+	* @return {promise} result of promise
+	*/
+	async getAllGamesByMonth(nbPage = 1) {
+
+		const today = new Date();
+		const thirtyDay = new Date(today);
+		thirtyDay.setDate(today.getDate() - 30)
+		const formatingDate = (date)=> date.toISOString().split('T')[0]
+
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(thirtyDay)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
+			if (!response.ok) {
+				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+			}
+
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+
+				return { error: "Aucun n'a été trouvé", gameData: null };
+			}
+			return { gameData, error: null };
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
+
+	/*
+	* Get all game by week
+	* @params{nbPages} value of page
+	* @return {promise} result of promise
+	*/
+	async getAllGamesByWeek(nbPage = 1) {
+
+		const today = new Date();
+		const week = new Date(today);
+		week.setDate(today.getDate() - 7)
+		const formatingDate = (date)=> date.toISOString().split('T')[0]
+
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
+			if (!response.ok) {
+				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+
+				return { error: "Aucun n'a été trouvé", gameData: null };
+			}
+			return { gameData, error: null };
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
+
+
+	/*
+	* Get all game next week
+	* @params{nbPages} value of page
+	* @return {promise} result of promise
+	*/
+	async getAllGamesNextWeek(nbPage = 1) {
+
+		const today = new Date();
+		const week = new Date(today);
+		week.setDate(today.getDate() + 7)
+		const formatingDate = (date)=> date.toISOString().split('T')[0]
+
+		try {
+			const response = await fetch(`https://api.rawg.io/api/games?key=192c02abeefe448e8434a0b1a68694d7&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
+			if (!response.ok) {
+				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+			}
+			const gameData = await response.json();
+			if (gameData.count === 0) {
+
+				return { error: "Aucun n'a été trouvé", gameData: null };
+			}
+			return { gameData, error: null };
+		} catch (error) {
+			console.error("Erreur getGame", error.message)
+			return { error: error.message, gameData: null };
+		}
+	},
 };
 export default rawgCalls;

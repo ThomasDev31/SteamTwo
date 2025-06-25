@@ -11,7 +11,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&page=${nbPage}`);
 			if (!response.ok) {
-				throw new Error("Erreur sur la requete " + response.status);
+				throw new Error(`Erreure sur la requete getAllGames (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 			if (gameData.count === 0 || !gameData.results) {
@@ -50,7 +50,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
+				throw new Error(`Erreure sur la requete par Id getGame (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 
@@ -107,7 +107,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${name}&page=${nbPage}`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
+				throw new Error(`Erreure sur la requete par Recherche getGameBySearch (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 			if (gameData.count === 0) {
@@ -131,7 +131,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games/${gameId}/movies?key=${apiKey}`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
+				throw new Error(`Erreure sur la requete récupération vidéo getGameMovies (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 			if (gameData.count === 0) {
@@ -159,7 +159,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${startYear},${endYear}&ordering=metacritic${nbPage}`);
 			if (!response.ok) {
-				throw new Error("Erreur sur la requete " + response.status);
+				throw new Error(`Erreure sur la requete getBestOfYear (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 
@@ -202,7 +202,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${startYear},${endYear}&ordering=rating${nbPage}`);
 			if (!response.ok) {
-				throw new Error("Erreur sur la requete " + response.status);
+				throw new Error(`Erreure sur la requete PopularOfYear (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 
@@ -242,7 +242,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&ordering=metacritic${nbPage}`);
 			if (!response.ok) {
-				throw new Error("Erreur sur la requete " + response.status);
+				throw new Error(`Erreure sur la requete BestOfTime (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 
@@ -284,7 +284,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&parent_platforms=${platform}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id  + (${response.status})`);
+				throw new Error(`Erreure sur la requete GamesByPlatform (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 
@@ -327,7 +327,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&genres=${category}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+				throw new Error(`Erreure sur la requete par Category (statut : ${response.status})`);
 			}
 
 			const gameData = await response.json();
@@ -375,7 +375,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${formatingDate(thirtyDay)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+				throw new Error(`Erreure sur la requete par GamesByMonth (statut : ${response.status})`);
 			}
 
 			const gameData = await response.json();
@@ -422,7 +422,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+				throw new Error(`Erreure sur la requete GamesByWeek (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 
@@ -468,7 +468,7 @@ const rawgCalls = {
 		try {
 			const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&dates=${formatingDate(week)},${formatingDate(today)}&page=${nbPage}&page_size=20`);
 			if (!response.ok) {
-				throw new Error(`Erreure sur la requete par Id + (${response.status})`);
+				throw new Error(`Erreure sur la requete NextWeek (statut : ${response.status})`);
 			}
 			const gameData = await response.json();
 

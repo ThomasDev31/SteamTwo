@@ -8,6 +8,11 @@ const Nav = () => {
 	);
 };
 
-const StyledNav = styled.nav``;
+const StyledNav = styled.nav`
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+`;
 
 export default Nav;

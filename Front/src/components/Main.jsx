@@ -5,13 +5,43 @@ import { useState, useEffect } from "react";
 import rawgCalls from "../api/rawgCalls";
 import GameCard from "./GameCard";
 
-const Main = () => {
+const calls = [
+		{ name:"Last 30 days", call: rawgCalls.getAllGames },
+		{ name:"This week", call: rawgCalls.getAllGamesByWeek },
+		{ name:"Next week", call: rawgCalls.getAllGamesNextWeek },
+		{ name:"Best of the year", call: rawgCalls.getAllGamesBestOfYear },
+		{ name:"Popular in 2025", call: rawgCalls.getAllGamesMostPopularOfYear },
+		{ name:"All time top", call: rawgCalls.getAllGamesBestOfTime },
+		{ name:"Platforms", call:(plat) => {
+			rawgCalls.getAllGamesByPlatform(plat)
+		}},
+		{ name:"Genres", call:(genre) => {
+			rawgCalls.getAllGamesByCategory(genre)
+		}}
+	]
+
+const Main = ({category}) => {
 	const [datas, setDatas] = useState([]);
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);
+	const [functionData, setFunctionData] = useState();
+
+	const platformName = category?.cat || 'Last 30 days';
+	console.log(platformName);
+
+	const filterCategory = calls.filter((k) => 
+		 platformName.includes(k.name)
+	);
+	console.log(filterCategory[0].call);
+
+	useEffect(() => {
+		setFunctionData(filterCategory[0].call)
+	},[])
+	
+
 	const fetchdata = async () => {
 		try {
-			const responses = await rawgCalls.getAllGames();
+			const responses = await functionData();
 			setDatas(responses[0].result);
 		} catch (err) {
 			setError(err.message);
@@ -20,7 +50,8 @@ const Main = () => {
 		}
 	};
 	useEffect(() => {
-		fetchdata();
+		fetchdata();	
+		
 	}, []);
 
 	function GoToGamePage(id) {

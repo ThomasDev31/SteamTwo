@@ -2,12 +2,17 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Nav from "../components/little_components/Nav";
 import Main from "../components/Main";
+import { useState } from "react";
+import rawgCalls from "../api/rawgCalls";
 
 const Layout = () => {
+	const [category, setCategory] = useState("Last 30 days");
+
 	return (
 		<StyledLayout className="layout">
 			<Header />
-			<Main />
+			<Main category={category} />
+			<Nav category={category} setCategory={setCategory} />
 		</StyledLayout>
 	);
 };

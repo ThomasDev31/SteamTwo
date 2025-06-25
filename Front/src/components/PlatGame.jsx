@@ -1,22 +1,30 @@
-
 const PlatGame = (props = []) => {
-        const { platform } = props
-        console.log(platform)
+    const { platform } = props;
+
     const logo = [
-	    {pc : `<i class="fa-brands fa-android"></i>`},
-        {playstation : `<i class="fa-brands fa-android"></i>`},
-        {xbox : `<i class="fa-brands fa-android"></i>`},
-        {ios : `<i class="fa-brands fa-android"></i>`},
-        {mac : `<i class="fa-brands fa-android"></i>`},
-        {linux : `<i class="fa-brands fa-android"></i>`},
-        {nintendo : `<i class="fa-brands fa-android"></i>`},
-        {android : `<i class="fa-brands fa-android"></i>`}
-    ]
-    const datas = []
-    for(let i = 0; i<platform.length; i++){
-        console.log(platform[i].slug)
-    }
-    return (<></>)
-}
+        { slug: "pc", logo: `<i class="fa-brands fa-windows"></i>` },
+        { slug: "playstation", logo: `<i class="fa-brands fa-playstation"></i>` },
+        { slug: "xbox", logo: `<i class="fa-brands fa-xbox"></i>` },
+        { slug: "ios", logo: `<i class="fa-brands fa-app-store-ios"></i>` },
+        { slug: "mac", logo: `<i class="fa-brands fa-apple"></i>` },
+        { slug: "linux", logo: `<i class="fa-brands fa-linux"></i>` },
+        { slug: "nintendo", logo: `<i class="fa-solid fa-gamepad"></i>` },
+        { slug: "android", logo: `<i class="fa-brands fa-android"></i>` },
+    ]; 
+    const platformSlug = Array.isArray(platform) ? platform.map((p) => p.slug) : [];
+    const matchingPlatform = logo.filter((p) => platformSlug.includes(p.slug));
+
+    return (
+        <>
+            {matchingPlatform &&
+                matchingPlatform.map((m) => (
+                    <span
+                        key={m.slug}
+                        dangerouslySetInnerHTML={{ __html: m.logo }}
+                    />
+            ))}
+        </> 
+    );
+};
 
 export default PlatGame;

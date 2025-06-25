@@ -5,8 +5,6 @@ import { navContent } from "../../data";
  */
 
 const Nav = ( {category, setCategory}  ) => {
-	console.log(category);
-	console.log(setCategory);
 	return (
 		<StyledNav>
 			{navContent.map((section) => (
@@ -15,8 +13,8 @@ const Nav = ( {category, setCategory}  ) => {
 					<ul>
 						{section.categories.map((category) => (
 							<li key={category.title} onClick={() => { 
-								setCategory((s) => ({section:section.sectionName, category:category.title}))
-								console.log(category);
+								setCategory((s) => ({section:section.sectionName, cat:category.title}))
+								;
 								
 							}}>
 								<div className="container-icon">

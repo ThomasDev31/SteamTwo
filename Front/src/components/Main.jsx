@@ -12,8 +12,8 @@ const calls = [
 		{ name:"Best of the year", call: rawgCalls.getAllGamesBestOfYear },
 		{ name:"Popular in 2025", call: rawgCalls.getAllGamesMostPopularOfYear },
 		{ name:"All time top", call: rawgCalls.getAllGamesBestOfTime },
-		{ name:"Platforms", call:(platform) => {
-			rawgCalls.getAllGamesByPlatform(plaftorm)
+		{ name:"Platforms", call:(plat) => {
+			rawgCalls.getAllGamesByPlatform(plat)
 		}},
 		{ name:"Genres", call:(genre) => {
 			rawgCalls.getAllGamesByCategory(genre)
@@ -21,20 +21,27 @@ const calls = [
 	]
 
 const Main = ({category}) => {
-	
-	const platformName = category?.category;
-	console.log(platformName);
-	const filterCategory = calls.filter((k) => {
-		return platformName.includes(k.name)
-	});
-	console.log(filterCategory);	
-
 	const [datas, setDatas] = useState([]);
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);
+	const [functionData, setFunctionData] = useState();
+
+	const platformName = category?.cat || 'Last 30 days';
+	console.log(platformName);
+
+	const filterCategory = calls.filter((k) => 
+		 platformName.includes(k.name)
+	);
+	console.log(filterCategory[0].call);
+
+	useEffect(() => {
+		setFunctionData(filterCategory[0].call)
+	},[])
+	
+
 	const fetchdata = async () => {
 		try {
-			const responses = await rawgCalls.getAllGames();
+			const responses = await functionData();
 			setDatas(responses[0].result);
 		} catch (err) {
 			setError(err.message);
@@ -43,7 +50,8 @@ const Main = ({category}) => {
 		}
 	};
 	useEffect(() => {
-		fetchdata();
+		fetchdata();	
+		
 	}, []);
 
 	function GoToGamePage(id) {

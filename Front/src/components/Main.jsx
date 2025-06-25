@@ -62,6 +62,7 @@ const Main = ({ category }) => {
             </button>
 
             <div className="games-cards">
+				{loading && (<p>Chargement des données</p>)}
                 {datas.length === 0 && !loading && <p>😕 Aucun jeu trouvé.</p>}
                 {!error &&
                     !loading &&

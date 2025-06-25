@@ -5,7 +5,30 @@ import { useState, useEffect } from "react";
 import rawgCalls from "../api/rawgCalls";
 import GameCard from "./GameCard";
 
-const Main = () => {
+const calls = [
+		{ name:"Last 30 days", call: rawgCalls.getAllGames },
+		{ name:"This week", call: rawgCalls.getAllGamesByWeek },
+		{ name:"Next week", call: rawgCalls.getAllGamesNextWeek },
+		{ name:"Best of the year", call: rawgCalls.getAllGamesBestOfYear },
+		{ name:"Popular in 2025", call: rawgCalls.getAllGamesMostPopularOfYear },
+		{ name:"All time top", call: rawgCalls.getAllGamesBestOfTime },
+		{ name:"Platforms", call:(platform) => {
+			rawgCalls.getAllGamesByPlatform(plaftorm)
+		}},
+		{ name:"Genres", call:(genre) => {
+			rawgCalls.getAllGamesByCategory(genre)
+		}}
+	]
+
+const Main = ({category}) => {
+	
+	const platformName = category?.category;
+	console.log(platformName);
+	const filterCategory = calls.filter((k) => {
+		return platformName.includes(k.name)
+	});
+	console.log(filterCategory);	
+
 	const [datas, setDatas] = useState([]);
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);

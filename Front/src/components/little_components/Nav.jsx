@@ -4,7 +4,9 @@ import { navContent } from "../../data";
 /*
  */
 
-const Nav = () => {
+const Nav = ( {category, setCategory}  ) => {
+	console.log(category);
+	console.log(setCategory);
 	return (
 		<StyledNav>
 			{navContent.map((section) => (
@@ -12,7 +14,11 @@ const Nav = () => {
 					<h3>{section.sectionName}</h3>
 					<ul>
 						{section.categories.map((category) => (
-							<li key={category.title}>
+							<li key={category.title} onClick={() => { 
+								setCategory((s) => ({section:section.sectionName, category:category.title}))
+								console.log(category);
+								
+							}}>
 								<div className="container-icon">
 									<i className={category.icon}></i>
 								</div>

@@ -6,7 +6,7 @@ import Test from "../components/Test";
 const Layout = () => {
 	return (
 		<StyledLayout className="layout">
-			<Test /> 
+			<Test />
 			<Header />
 			<Main />
 			<Nav />

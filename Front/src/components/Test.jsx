@@ -1,19 +1,27 @@
-import { useEffect, useState } from "react"
-import rawgQueries from '../api/rawgQueries';
+import { useEffect, useState } from "react";
+import rawgCalls from "../api/rawgCalls";
+import rawgQueries from "../api/rawgQueries";
 
-function Test (){
-    const [datas, setDatas] = useState([])
-    const fetchdata=  async() => {
-        const responses = await rawgQueries.getAllGamesByCategory("action", 1);
-    
-           
-       setDatas(responses)
-    } 
+function Test() {
+    const [datas, setDatas] = useState([]);
+    const [datas2, setDatas2] = useState([]);
+
+    const fetchdata = async () => {
+        const responses = await rawgCalls.getGame('3498');
+
+        setDatas(responses);
+    };
+    const fetchdatabis = async () => {
+        const responses = await rawgQueries.getTags();
+      
+        setDatas2(responses);
+    };
     useEffect(() => {
-      fetchdata()
-    },[])
+        fetchdata();
+        fetchdatabis();
+    }, []);
 
-    return (console.log(datas))
+    return console.log(datas, datas2);
 }
 
 export default Test;

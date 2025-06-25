@@ -138,12 +138,13 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
 				title_data : `Best game of year`,
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -182,12 +183,13 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
 				title_data : `Best game of ${year}`,
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -223,11 +225,12 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -265,11 +268,12 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice()
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -309,11 +313,12 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice()
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -357,12 +362,13 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
 				title_data:`Best game of month`,
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -404,12 +410,13 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
 				title_data : `Best game of week`,
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
@@ -451,12 +458,13 @@ const rawgCalls = {
 			const result = gameData.results.map(r => ({
 				id: r.id,
 				title: r.name,
+				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
 				title_data : `Next game of week`,
 			}))
 
-			return [ result , {error: null}];
+			return [ {result:  result} , {error: null}];
 
 		} catch (error) {
 			console.error("Erreur getGame", error.message)

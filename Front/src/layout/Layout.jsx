@@ -8,7 +8,6 @@ const Layout = () => {
 		<StyledLayout className="layout">
 			<Header />
 			<Main />
-			<Nav />
 		</StyledLayout>
 	);
 };

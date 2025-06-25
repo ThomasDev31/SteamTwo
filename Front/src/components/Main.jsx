@@ -53,15 +53,15 @@ const Main = () => {
 };
 
 const StyledMain = styled.main`
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    margin-top: 15px;
-    
-    .category {
-        font-size: 2.5rem;
-        font-weight: bolder;
-    }
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	margin-top: 15px;
+
+	.category {
+		font-size: 2.5rem;
+		font-weight: bolder;
+	}
 
 	button.order-by {
 		width: fit-content;
@@ -82,16 +82,12 @@ const StyledMain = styled.main`
 		}
 	}
 
-    .games-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-        gap: 30px;
-        width: 80vw;
-        padding: 30px;
-    }
-    GameCard:hover{
-        transform:scale(1.2)
-    }
+	.games-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+		gap: 30px;
+		padding: 30px;
+	}
 `;
 
 export default Main;

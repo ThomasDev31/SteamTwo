@@ -55,7 +55,6 @@ const Main = () => {
 const StyledMain = styled.main`
 	display: flex;
 	flex-flow: column;
-	align-items: center;
 	margin-top: 15px;
 
 	.category {
@@ -64,6 +63,7 @@ const StyledMain = styled.main`
 	}
 
 	button.order-by {
+		width: fit-content;
 		margin-top: 15px;
 		padding: 5px 15px;
 		display: flex;
@@ -85,8 +85,8 @@ const StyledMain = styled.main`
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		gap: 20px;
-		width: 80vw;
 		padding: 20px;
+		padding-left: 0;
 	}
 `;
 

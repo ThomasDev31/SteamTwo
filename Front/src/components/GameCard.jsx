@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PlatGame from "./little_components/PlatGame";
 const GameCard = ({ title, price, image, platforms }) => {
+	console.log(platforms);
 	return (
 		<StyledGameCard className="Game_Card">
 			<div className="img">
@@ -10,10 +11,7 @@ const GameCard = ({ title, price, image, platforms }) => {
 				<div className="Price_CTA">add to cart</div>
 				<div className="Price">{price}</div>
 			</div>
-
-			<div className="Platforms">
-				<PlatGame platform={platforms || {}} />
-			</div>
+			<div className="Platforms">{"platforms"}</div>
 			<div className="Game_Title">{title}</div>
 		</StyledGameCard>
 	);
@@ -29,13 +27,6 @@ const StyledGameCard = styled.div`
 		width: 100px;
 		height: auto;
 		object-fit: cover;
-	}
-	.Platforms {
-		display: flex;
-
-		i {
-			color: red;
-		}
 	}
 `;
 

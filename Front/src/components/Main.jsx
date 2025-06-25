@@ -57,7 +57,7 @@ const StyledMain = styled.main`
     flex-flow: column;
     align-items: center;
     margin-top: 15px;
-
+    
     .category {
         font-size: 2.5rem;
         font-weight: bolder;
@@ -83,10 +83,10 @@ const StyledMain = styled.main`
 
     .games-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
         width: 80vw;
-        padding: 20px;
+        padding: 30px;
     }
 `;
 

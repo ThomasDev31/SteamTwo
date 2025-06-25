@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import rawgCalls from "../api/rawgCalls";
-import { data } from "react-router";
 import GameCard from "./GameCard";
 
 const Main = () => {
@@ -11,6 +10,7 @@ const Main = () => {
 	const fetchdata = async () => {
 		const responses = await rawgCalls.getAllGames();
 		setDatas(responses);
+		console.log(datas);
 	};
 	useEffect(() => {
 		fetchdata();
@@ -30,8 +30,8 @@ const Main = () => {
 			</button>
 
 			<div className="games-cards">
-				{datas.gameData &&
-					datas.gameData.results.map((game) => (
+				{datas[0] &&
+					datas[0].map((game) => (
 						<GameCard
 							key={game.id}
 							title={game.name}

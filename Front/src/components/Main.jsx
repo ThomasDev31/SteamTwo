@@ -27,7 +27,7 @@ const Main = () => {
     function GoToGamePage(id) {
         console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
     }
-    console.log(datas);
+    console.log(datas[0]?.platform);
     return (
         <StyledMain>
             <h2 className="category">Last 30 days</h2>
@@ -45,7 +45,7 @@ const Main = () => {
                             title={game.title}
                             image={game.image}
                             price={`${game.price}€`}
-                            platform={game.platform.map((plat) => plat.slug)}
+                            platforms={game?.platform}
                         />
                     ))}
             </div>

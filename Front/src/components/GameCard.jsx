@@ -1,6 +1,8 @@
 import styled from "styled-components";
-
+import PlatGame from "./PlatGame";
 const GameCard = ({ title, price, image, platforms }) => {
+	console.log(platforms)
+	
     return (
         <StyledGameCard className="Game_Card">
             <div className="img">
@@ -10,7 +12,8 @@ const GameCard = ({ title, price, image, platforms }) => {
                 <div className="Price_CTA">add to cart</div>
                 <div className="Price">{price}</div>
             </div>
-            <div className="Platforms">{platforms?.map(plat => (<p key={plat.id}>{plat.slug}</p>))}</div>
+			<PlatGame platform={platforms || {}}/>
+            <div className="Platforms"></div>
             <div className="Game_Title">{title}</div>
         </StyledGameCard>
     );
@@ -65,7 +68,3 @@ export default GameCard;
 		))}
 </div>
 */
-const logo = {
-	pc : `<i class="fa-brands fa-android"></i>`
-	
-}

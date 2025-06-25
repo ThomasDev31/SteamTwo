@@ -27,7 +27,6 @@ const Main = () => {
     function GoToGamePage(id) {
         console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
     }
-    console.log(datas[0]?.platform);
     return (
         <StyledMain>
             <h2 className="category">Last 30 days</h2>

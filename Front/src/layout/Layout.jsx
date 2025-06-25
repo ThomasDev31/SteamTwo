@@ -14,7 +14,7 @@ const Layout = () => {
 };
 
 const StyledLayout = styled.div`
-	background-color: black;
+	background-color: rgb(15, 16, 17);
 	min-height: 100vh;
 	color: white;
 	display: grid;

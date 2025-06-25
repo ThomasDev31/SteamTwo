@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { navContent } from "../data";
+import { navContent } from "../../data";
 
 /*
  */

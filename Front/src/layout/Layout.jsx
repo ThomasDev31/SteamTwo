@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Header from "../components/Header";
-import Nav from "../components/Nav";
+import Nav from "../components/little_components/Nav";
 import Main from "../components/Main";
 
 const Layout = () => {

@@ -5,17 +5,14 @@ import Main from "../components/Main";
 import { useState } from "react";
 import rawgCalls from "../api/rawgCalls";
 
-
-
 const Layout = () => {
-	
-	const [ category, setCategory ] = useState("Last 30 days")
+	const [category, setCategory] = useState("Last 30 days");
 
 	return (
 		<StyledLayout className="layout">
 			<Header />
-			<Main category = { category}/>
-			<Nav category = { category} setCategory = {setCategory} />
+			<Main category={category} />
+			<Nav category={category} setCategory={setCategory} />
 		</StyledLayout>
 	);
 };

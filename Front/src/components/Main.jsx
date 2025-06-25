@@ -7,10 +7,17 @@ import GameCard from "./GameCard";
 
 const Main = () => {
 	const [datas, setDatas] = useState([]);
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(true);
 	const fetchdata = async () => {
-		const responses = await rawgCalls.getAllGames();
-		setDatas(responses);
-		console.log(datas);
+		try {
+			const responses = await rawgCalls.getAllGames();
+			setDatas(responses[0].result);
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
 	};
 	useEffect(() => {
 		fetchdata();
@@ -19,7 +26,7 @@ const Main = () => {
 	function GoToGamePage(id) {
 		console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
 	}
-
+	console.log(datas);
 	return (
 		<StyledMain>
 			<h2 className="category">Last 30 days</h2>
@@ -30,16 +37,15 @@ const Main = () => {
 			</button>
 
 			<div className="games-cards">
-				{datas[0] &&
-					datas[0].map((game) => (
+				{!error &&
+					!loading &&
+					datas.map((game) => (
 						<GameCard
 							key={game.id}
-							title={game.name}
-							image={game.background_image}
-							price={50}
-							platforms={game.parent_platforms.map(
-								(plat) => plat.platform.slug
-							)}
+							title={game.title}
+							image={game.image}
+							price={`${game.price}€`}
+							platform={game.platform.map((plat) => plat.slug)}
 						/>
 					))}
 			</div>

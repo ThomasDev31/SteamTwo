@@ -139,7 +139,8 @@ const rawgCalls = {
 				id: r.id,
 				title: r.name,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
-				price: generateRandomPrice()
+				price: generateRandomPrice(),
+				title_data : `Best game of year`,
 			}))
 
 			return [ result , {error: null}];
@@ -182,7 +183,8 @@ const rawgCalls = {
 				id: r.id,
 				title: r.name,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
-				price: generateRandomPrice()
+				price: generateRandomPrice(),
+				title_data : `Best game of ${year}`,
 			}))
 
 			return [ result , {error: null}];
@@ -222,7 +224,7 @@ const rawgCalls = {
 				id: r.id,
 				title: r.name,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
-				price: generateRandomPrice()
+				price: generateRandomPrice(),
 			}))
 
 			return [ result , {error: null}];
@@ -356,7 +358,8 @@ const rawgCalls = {
 				id: r.id,
 				title: r.name,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
-				price: generateRandomPrice()
+				price: generateRandomPrice(),
+				title_data:`Best game of month`,
 			}))
 
 			return [ result , {error: null}];
@@ -402,7 +405,8 @@ const rawgCalls = {
 				id: r.id,
 				title: r.name,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
-				price: generateRandomPrice()
+				price: generateRandomPrice(),
+				title_data : `Best game of week`,
 			}))
 
 			return [ result , {error: null}];
@@ -448,7 +452,8 @@ const rawgCalls = {
 				id: r.id,
 				title: r.name,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
-				price: generateRandomPrice()
+				price: generateRandomPrice(),
+				title_data : `Next game of week`,
 			}))
 
 			return [ result , {error: null}];

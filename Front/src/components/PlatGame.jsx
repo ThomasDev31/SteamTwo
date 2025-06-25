@@ -13,7 +13,9 @@ const PlatGame = (props = []) => {
         {android : `<i class="fa-brands fa-android"></i>`}
     ]
     const datas = []
-    for(let i = 0; i<platform)
+    for(let i = 0; i<platform.length; i++){
+        console.log(platform[i].slug)
+    }
     return (<></>)
 }
 

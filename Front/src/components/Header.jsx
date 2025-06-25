@@ -74,6 +74,10 @@ const StyledHeader = styled.header`
 		border: 0;
 		cursor: pointer;
 	}
+
+	@media (min-width: 500px) {
+		grid-column: 1 / -1;
+	}
 `;
 
 export default Header;

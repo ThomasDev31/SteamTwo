@@ -1,21 +1,10 @@
-import {
-	faPlaystation,
-	faXbox,
-	faDeskpro,
-	faGamepad,
-	faAndroid,
-	faApple,
-	faPuzzlePiece,
-	faBaseball,
-} from "@fortawesome/free-brands-svg-icons";
-
-const navContent = [
+export const navContent = [
 	{
 		sectionName: "Your Games",
 		categories: [
 			{
 				title: "Added Games",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 		],
 	},
@@ -24,15 +13,15 @@ const navContent = [
 		categories: [
 			{
 				title: "Last 30 days",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "This week",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Next week",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 		],
 	},
@@ -41,15 +30,15 @@ const navContent = [
 		categories: [
 			{
 				title: "Best of the year",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Popular in 2025",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "All time top",
-				icon: "/logo.png",
+				icon: "fa-brands fa-playstation",
 			},
 		],
 	},
@@ -58,27 +47,27 @@ const navContent = [
 		categories: [
 			{
 				title: "PC",
-				icon: faDeskpro,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "PlayStation",
-				icon: faPlaystation,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Xbox One",
-				icon: faXbox,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Nintendo Switch",
-				icon: faGamepad,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "iOS",
-				icon: faApple,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Android",
-				icon: faAndroid,
+				icon: "fa-brands fa-playstation",
 			},
 		],
 	},
@@ -87,35 +76,35 @@ const navContent = [
 		categories: [
 			{
 				title: "Action",
-				icon: faHandFist,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Strategy",
-				icon: faPuzzlePiece,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "RPG",
-				icon: faPuzzlePiece,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Shooter",
-				icon: faPuzzlePiece,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Adventure",
-				icon: faPuzzlePiece,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Puzzle",
-				icon: faPuzzlePiece,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Racing",
-				icon: faPuzzlePiece,
+				icon: "fa-brands fa-playstation",
 			},
 			{
 				title: "Sports",
-				icon: faBaseball,
+				icon: "fa-brands fa-playstation",
 			},
 		],
 	},

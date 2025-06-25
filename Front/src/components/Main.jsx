@@ -26,7 +26,6 @@ const Main = () => {
 	function GoToGamePage(id) {
 		console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
 	}
-	console.log(datas);
 	return (
 		<StyledMain>
 			<h2 className="category">Last 30 days</h2>
@@ -45,7 +44,7 @@ const Main = () => {
 							title={game.title}
 							image={game.image}
 							price={`${game.price}€`}
-							platform={game.platform.map((plat) => plat.slug)}
+							platforms={game?.platform}
 						/>
 					))}
 			</div>
@@ -56,7 +55,6 @@ const Main = () => {
 const StyledMain = styled.main`
 	display: flex;
 	flex-flow: column;
-	align-items: center;
 	margin-top: 15px;
 
 	.category {
@@ -65,6 +63,7 @@ const StyledMain = styled.main`
 	}
 
 	button.order-by {
+		width: fit-content;
 		margin-top: 15px;
 		padding: 5px 15px;
 		display: flex;
@@ -86,8 +85,8 @@ const StyledMain = styled.main`
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		gap: 20px;
-		width: 80vw;
 		padding: 20px;
+		padding-left: 0;
 	}
 `;
 

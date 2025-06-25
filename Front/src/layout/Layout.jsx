@@ -6,7 +6,6 @@ import Main from "../components/Main";
 const Layout = () => {
 	return (
 		<StyledLayout className="layout">
-
 			<Header />
 			<Main />
 			<Nav />
@@ -18,6 +17,9 @@ const StyledLayout = styled.div`
 	background-color: black;
 	min-height: 100vh;
 	color: white;
+	display: grid;
+	grid-template-rows: 100px auto;
+	grid-template-columns: 300px auto;
 `;
 
 export default Layout;

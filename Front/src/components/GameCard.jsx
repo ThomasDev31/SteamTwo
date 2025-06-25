@@ -25,6 +25,10 @@ const StyledGameCard = styled.div`
     overflow: hidden;
     cursor: pointer;
     padding-bottom: 10px;
+	transition: .3s transform ease-in-out; 
+	&:hover{
+		transform:scale(1.1);
+	}
     img {
         overflow: hidden;
         aspect-ratio: 16/9;
@@ -51,6 +55,7 @@ const StyledGameCard = styled.div`
         margin: 5px 10px;
 		font-size:1.4rem;
     }
+
 `;
 
 export default GameCard;

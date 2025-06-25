@@ -84,10 +84,13 @@ const StyledMain = styled.main`
 
     .games-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
         gap: 30px;
         width: 80vw;
         padding: 30px;
+    }
+    GameCard:hover{
+        transform:scale(1.2)
     }
 `;
 

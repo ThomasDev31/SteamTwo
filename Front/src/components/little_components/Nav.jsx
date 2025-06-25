@@ -30,7 +30,6 @@ const StyledNav = styled.nav`
 	z-index: 100;
 	padding: 20px 40px;
 	font-weight: 300;
-
 	.nav-section {
 		margin-bottom: 20px;
 	}
@@ -50,6 +49,7 @@ const StyledNav = styled.nav`
 		display: flex;
 		align-items: center;
 		gap: 10px;
+		
 		font-size: 1.2rem;
 		cursor: pointer;
 	}
@@ -57,9 +57,9 @@ const StyledNav = styled.nav`
 	.nav-section li i {
 		font-size: 1.5rem;
 		color: #ffffff;
-		background-color: #000000;
+		background-color: rgb(32, 32, 32);
 		border-radius: 10px;
-		padding: 5px;
+		padding: 10px;
 		transition: color 0.3s ease, background-color 0.3s ease;
 	}
 

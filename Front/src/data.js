@@ -13,15 +13,17 @@ export const navContent = [
 		categories: [
 			{
 				title: "Last 30 days",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-star",
 			},
+			
 			{
 				title: "This week",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-fire",
+				
 			},
 			{
 				title: "Next week",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-forward",
 			},
 		],
 	},
@@ -30,15 +32,15 @@ export const navContent = [
 		categories: [
 			{
 				title: "Best of the year",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-trophy",
 			},
 			{
 				title: "Popular in 2025",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-chart-simple",				
 			},
 			{
 				title: "All time top",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-crown",
 			},
 		],
 	},
@@ -47,7 +49,7 @@ export const navContent = [
 		categories: [
 			{
 				title: "PC",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-brands fa-windows",
 			},
 			{
 				title: "PlayStation",
@@ -55,19 +57,19 @@ export const navContent = [
 			},
 			{
 				title: "Xbox One",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-brands fa-xbox",
 			},
 			{
 				title: "Nintendo Switch",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-gamepad",
 			},
 			{
 				title: "iOS",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-brands fa-app-store-ios",
 			},
 			{
 				title: "Android",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-brands fa-android",
 			},
 		],
 	},
@@ -76,36 +78,39 @@ export const navContent = [
 		categories: [
 			{
 				title: "Action",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-hand-fist",
 			},
 			{
 				title: "Strategy",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-chess-knight",
 			},
 			{
 				title: "RPG",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-skull-crossbones",
 			},
 			{
 				title: "Shooter",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-gun",
 			},
 			{
 				title: "Adventure",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-mountain",
 			},
 			{
 				title: "Puzzle",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-puzzle-piece",
 			},
 			{
 				title: "Racing",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-flag-checkered",
 			},
 			{
 				title: "Sports",
-				icon: "fa-brands fa-playstation",
+				icon: "fa-solid fa-volleyball",
 			},
 		],
 	},
 ];
+
+
+ 

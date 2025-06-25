@@ -9,7 +9,6 @@ function Header({onSearch}) {
         <>
             <header>
                 <Link to="/" ><img src="" alt="Logo" /></Link>
-                
                 <form action="">
                     <div>
                         <input type="text" onChange={handleChange}/>

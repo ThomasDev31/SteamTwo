@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PlatGame from "./PlatGame";
+import PlatGame from "./little_components/PlatGame";
 const GameCard = ({ title, price, image, platforms }) => {
     return (
         <StyledGameCard className="Game_Card">

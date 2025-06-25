@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PlatGame from "./PlatGame";
 const GameCard = ({ title, price, image, platforms }) => {
-	console.log(platforms)
+
 	
     return (
         <StyledGameCard className="Game_Card">

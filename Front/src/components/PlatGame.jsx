@@ -12,7 +12,8 @@ const PlatGame = (props = []) => {
         {nintendo : `<i class="fa-brands fa-android"></i>`},
         {android : `<i class="fa-brands fa-android"></i>`}
     ]
-
+    const datas = []
+    for(let i = 0; i<platform)
     return (<></>)
 }
 

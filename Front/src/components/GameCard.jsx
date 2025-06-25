@@ -1,35 +1,35 @@
 import styled from "styled-components";
 import PlatGame from "./PlatGame";
 const GameCard = ({ title, price, image, platforms }) => {
-	console.log(platforms)
-	
-    return (
-        <StyledGameCard className="Game_Card">
-            <div className="img">
-                <img src={image} alt={`La photo du jeu ${title}`} />
-            </div>
-            <div className="Price_Block">
-                <div className="Price_CTA">add to cart</div>
-                <div className="Price">{price}</div>
-            </div>
-			<PlatGame platform={platforms || {}}/>
-            <div className="Platforms"></div>
-            <div className="Game_Title">{title}</div>
-        </StyledGameCard>
-    );
+	console.log(platforms);
+
+	return (
+		<StyledGameCard className="Game_Card">
+			<div className="img">
+				<img src={image} alt={`La photo du jeu ${title}`} />
+			</div>
+			<div className="Price_Block">
+				<div className="Price_CTA">add to cart</div>
+				<div className="Price">{price}</div>
+			</div>
+			<PlatGame platform={platforms} />
+			<div className="Platforms"></div>
+			<div className="Game_Title">{title}</div>
+		</StyledGameCard>
+	);
 };
 
 const StyledGameCard = styled.div`
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    img {
-        overflow: hidden;
-        width: 100px;
-        height: auto;
-        object-fit: cover;
-    }
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+	cursor: pointer;
+	img {
+		overflow: hidden;
+		width: 100px;
+		height: auto;
+		object-fit: cover;
+	}
 `;
 
 export default GameCard;

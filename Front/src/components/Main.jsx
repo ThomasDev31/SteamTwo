@@ -97,12 +97,12 @@ const Main = ({ category }) => {
 				</h2>
 			)}
 
-			<button className="order-by">
-				<span>Order by: </span>
-				<span>Name </span>
-				<FontAwesomeIcon icon={faChevronDown} />
-			</button>
-
+			<FilterSelect
+				value={filter}
+				onChange={(newValue) => {
+					setFilter(newValue);
+				}}
+			/>
 			<div className="games-cards">
 				{loading && <p>Chargement des données</p>}
 				{filteredDatas.length === 0 && !loading && (
@@ -127,7 +127,6 @@ const Main = ({ category }) => {
 const StyledMain = styled.main`
 	display: flex;
 	flex-flow: column;
-	align-items: center;
 	margin-top: 15px;
 	position: relative;
 	.category {

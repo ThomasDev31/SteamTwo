@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import rawgCalls from "../api/rawgCalls";
 import GameCard from "./GameCard";
 import FilterSelect from "./little_components/FilterSelect";
+import { filterBy } from "../utils";
 
 const calls = [
 	{ name: "Last 30 days", call: rawgCalls.getAllGamesByMonth },
@@ -21,110 +22,117 @@ const calls = [
 ];
 
 const Main = ({ category }) => {
-    const [datas, setDatas] = useState([]);
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState(true);
-    const [functionData, setFunctionData] = useState();
-    
+	const [datas, setDatas] = useState([]);
+	const [error, setError] = useState();
+	const [loading, setLoading] = useState(true);
+	const [functionData, setFunctionData] = useState();
 
+	const filteredDatas = filterBy(datas, filter);
+	console.log("Filtered data: ", filteredDatas);
 
-    useEffect(() => {
+	useEffect(() => {
 		let matched;
-		if(category?.section === "Platforms"){
-             matched = {
-                name: "Platforms",
-                call: rawgCalls.getAllGamesByPlatform,
-                needsParam: true,
-            };
-		}else if(category?.section === "Genres"){
-             matched = {
-                name: "Genres",
-                call: rawgCalls.getAllGamesByCategory,
-                needsParam: true,
-            };
-        }else{
-            const standardCall = calls.find((k) => k.name === (category?.cat || "Last 30 days") );
-                matched = {
-                    call: standardCall.call,
-                    needsParam: false,
-                
-            }
-        }
-        setFunctionData(matched);
+		if (category?.section === "Platforms") {
+			matched = {
+				name: "Platforms",
+				call: rawgCalls.getAllGamesByPlatform,
+				needsParam: true,
+			};
+		} else if (category?.section === "Genres") {
+			matched = {
+				name: "Genres",
+				call: rawgCalls.getAllGamesByCategory,
+				needsParam: true,
+			};
+		} else {
+			const standardCall = calls.find(
+				(k) => k.name === (category?.cat || "Last 30 days")
+			);
+			matched = {
+				call: standardCall.call,
+				needsParam: false,
+			};
+		}
+		setFunctionData(matched);
+	}, [category?.cat || category?.section]);
 
-    }, [category?.cat || category?.section]);
+	const fetchdata = async () => {
+		if (!functionData) return;
+		try {
+			let param;
+			setLoading(true);
+			if (functionData.name === "Platforms") {
+				param = category?.id;
+			} else if (functionData.name === "Genres") {
+				param = category?.cat?.toLowerCase();
+			}
 
-    const fetchdata = async () => {
-         if (!functionData) return;
-        try {
-            let param;
-            setLoading(true);
-            if(functionData.name === "Platforms"){
-                 param = category?.id; 
-            }else if(functionData.name === "Genres"){
-                param = category?.cat?.toLowerCase(); 
-            }
-            
-            const response = functionData.needsParam
-                ? await functionData.call(param)
-                : await functionData.call();
+			const response = functionData.needsParam
+				? await functionData.call(param)
+				: await functionData.call();
 
-            setDatas(response?.[0]?.result || []);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+			setDatas(response?.[0]?.result || []);
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
+	};
 
-    useEffect(() => {
-        if (functionData) {
-            fetchdata();
-        }
-    }, [functionData]);
-    function GoToGamePage(id) {
-        console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
-    }
-    return (
-        <StyledMain>
-            {datas && !loading && ( <h2 className="category">{category?.cat || category?.section || "Last 30 days"}</h2>)}
-            
-            <button className="order-by">
-                <span>Order by: </span>
-                <span>Name </span>
-                <FontAwesomeIcon icon={faChevronDown} />
-            </button>
+	useEffect(() => {
+		if (functionData) {
+			fetchdata();
+			console.log(datas);
+		}
+	}, [functionData]);
+	function GoToGamePage(id) {
+		console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
+	}
+	return (
+		<StyledMain>
+			{datas && !loading && (
+				<h2 className="category">
+					{category?.cat || category?.section || "Last 30 days"}
+				</h2>
+			)}
 
-            <div className="games-cards">
-				{loading && (<p>Chargement des données</p>)}
-                {datas.length === 0 && !loading && <p>😕 Aucun jeu trouvé.</p>}
-                {!error &&
-                    !loading &&
-                    datas.map((game) => (
-                        <GameCard
-                            key={game.id}
-                            title={game.title}
-                            image={game.image}
-                            price={`${game.price}€`}
-                            platforms={game?.platform}
-                            id={game?.id}
-                        />
-                    ))}
-            </div>
-        </StyledMain>
-    );
+			<button className="order-by">
+				<span>Order by: </span>
+				<span>Name </span>
+				<FontAwesomeIcon icon={faChevronDown} />
+			</button>
+
+			<div className="games-cards">
+				{loading && <p>Chargement des données</p>}
+				{filteredDatas.length === 0 && !loading && (
+					<p>😕 Aucun jeu trouvé.</p>
+				)}
+				{!error &&
+					!loading &&
+					filteredDatas.map((game) => (
+						<GameCard
+							key={game.id}
+							title={game.title}
+							image={game.image}
+							price={`${game.price}€`}
+							platforms={game?.platform}
+						/>
+					))}
+			</div>
+		</StyledMain>
+	);
 };
 
 const StyledMain = styled.main`
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    margin-top: 15px;
-    position:relative;
-    .category {
-        font-size: 2.5rem;
-        font-weight: bolder;
-    }
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	margin-top: 15px;
+	position: relative;
+	.category {
+		font-size: 2.5rem;
+		font-weight: bolder;
+	}
 
 	button.order-by {
 		width: fit-content;

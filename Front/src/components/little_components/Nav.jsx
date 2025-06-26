@@ -13,7 +13,7 @@ const Nav = ( {category, setCategory}  ) => {
 					<ul>
 						{section.categories.map((category) => (
 							<li key={category.title} onClick={() => { 
-								setCategory((s) => ({section:section.sectionName, cat:category.title, id:category.id}))
+								setCategory(() => ({section:section.sectionName, cat:category.title, id:category.id}))
 								;
 								
 							}}>

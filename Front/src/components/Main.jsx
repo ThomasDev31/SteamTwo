@@ -21,77 +21,110 @@ const calls = [
 ];
 
 const Main = ({ category }) => {
-	const [datas, setDatas] = useState([]);
-	const [error, setError] = useState();
-	const [loading, setLoading] = useState(true);
-	const [functionData, setFunctionData] = useState();
-	const [filter, setFilter] = useState("popularity");
+    const [datas, setDatas] = useState([]);
+    const [error, setError] = useState();
+    const [loading, setLoading] = useState(true);
+    const [functionData, setFunctionData] = useState();
+    
 
-	const platformName = category?.cat || "Last 30 days";
-	console.log("Platforme:", platformName);
-	useEffect(() => {
-		// let matched = null
-		// if(category.section = "Platfomrs"){
 
-		// }
-		const matched = calls.find((k) => platformName === k.name);
-		setFunctionData(matched);
-		console.log(matched);
-	}, [platformName]);
+    useEffect(() => {
+		let matched;
+		if(category?.section === "Platforms"){
+             matched = {
+                name: "Platforms",
+                call: rawgCalls.getAllGamesByPlatform,
+                needsParam: true,
+            };
+		}else if(category?.section === "Genres"){
+             matched = {
+                name: "Genres",
+                call: rawgCalls.getAllGamesByCategory,
+                needsParam: true,
+            };
+        }else{
+            const standardCall = calls.find((k) => k.name === (category?.cat || "Last 30 days") );
+                matched = {
+                    call: standardCall.call,
+                    needsParam: false,
+                
+            }
+        }
+        setFunctionData(matched);
 
-	const fetchdata = async () => {
-		setLoading(true);
-		try {
-			const response = await functionData?.call(category?.param);
-			setDatas(response?.[0]?.result || []);
-		} catch (err) {
-			setError(err.message);
-		} finally {
-			setLoading(false);
-		}
-	};
-	useEffect(() => {
-		if (functionData) {
-			fetchdata();
-		}
-	}, [functionData, category]);
+    }, [category?.cat || category?.section]);
 
-	function GoToGamePage(id) {
-		console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
-	}
-	return (
-		<StyledMain>
-			<h2 className="category">Last 30 days</h2>
-			<FilterSelect value={filter} onChange={setFilter} />
+    const fetchdata = async () => {
+         if (!functionData) return;
+        try {
+            let param;
+            setLoading(true);
+            if(functionData.name === "Platforms"){
+                 param = category?.id; 
+            }else if(functionData.name === "Genres"){
+                param = category?.cat?.toLowerCase(); 
+            }
+            
+            const response = functionData.needsParam
+                ? await functionData.call(param)
+                : await functionData.call();
 
-			<div className="games-cards">
-				{loading && <p>Chargement des données</p>}
-				{datas.length === 0 && !loading && <p>😕 Aucun jeu trouvé.</p>}
-				{!error &&
-					!loading &&
-					datas.map((game) => (
-						<GameCard
-							key={game.id}
-							title={game.title}
-							image={game.image}
-							price={`${game.price}€`}
-							platforms={game?.platform}
-						/>
-					))}
-			</div>
-		</StyledMain>
-	);
+            setDatas(response?.[0]?.result || []);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (functionData) {
+            fetchdata();
+        }
+    }, [functionData]);
+    function GoToGamePage(id) {
+        console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
+    }
+    return (
+        <StyledMain>
+            {datas && !loading && ( <h2 className="category">{category?.cat || category?.section || "Last 30 days"}</h2>)}
+            
+            <button className="order-by">
+                <span>Order by: </span>
+                <span>Name </span>
+                <FontAwesomeIcon icon={faChevronDown} />
+            </button>
+
+            <div className="games-cards">
+				{loading && (<p>Chargement des données</p>)}
+                {datas.length === 0 && !loading && <p>😕 Aucun jeu trouvé.</p>}
+                {!error &&
+                    !loading &&
+                    datas.map((game) => (
+                        <GameCard
+                            key={game.id}
+                            title={game.title}
+                            image={game.image}
+                            price={`${game.price}€`}
+                            platforms={game?.platform}
+                            id={game?.id}
+                        />
+                    ))}
+            </div>
+        </StyledMain>
+    );
 };
 
 const StyledMain = styled.main`
-	display: flex;
-	flex-flow: column;
-	margin-top: 15px;
-
-	.category {
-		font-size: 2.5rem;
-		font-weight: bolder;
-	}
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 15px;
+    position:relative;
+    .category {
+        font-size: 2.5rem;
+        font-weight: bolder;
+    }
 
 	button.order-by {
 		width: fit-content;

@@ -62,8 +62,6 @@ const rawgCalls = {
 			const responseMovie = await rawgParams.getGameMovies(gameId);
 		
 			const responseScreenShots = await rawgParams.getGameScreenShots(gameId)
-			console.log()
-			console.log(responseScreenShots)
 			
 			const result = {
 				id: gameData.id,
@@ -228,6 +226,7 @@ const rawgCalls = {
 				image : r.background_image,
 				platform: r.parent_platforms?.map(p => ({ id: p.platform?.id, slug: p.platform?.slug })) || [],
 				price: generateRandomPrice(),
+				title_data : `Best game of all time`,
 			}))
 
 			return [ {result:  result} , {error: null}];

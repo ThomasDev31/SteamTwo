@@ -7,8 +7,8 @@ function Carrousel({ image, video }) {
     const currentItem = items[current];
     console.log(items);
     const next = () => setCurrent((prev) => (prev + 1) % items.length);
-    const prev = () =>
-        setCurrent((prev) => (prev - 1 + items.length) % items.length);
+    const prev = () => setCurrent((prev) => (prev - 1 + items.length) % items.length);
+    const slideTo = (index) => setCurrent(index)
     return (
         <>
             <Carousel>
@@ -31,7 +31,12 @@ function Carrousel({ image, video }) {
 
                 <div className="carousel-controls">
                     <button onClick={prev}>◀</button>
-                    <span>
+                    <div className="span-change">
+                        {items.map((_, index) => (
+                            <span key={index} onClick={() => slideTo(index)} className={index === current ? "active": ""}></span>
+                        ))}
+                    </div>
+                    <span className="span-value">
                         {current + 1} / {items.length}
                     </span>
                     <button onClick={next}>▶</button>
@@ -45,6 +50,8 @@ const Carousel = styled.div`
     width: 80%;
     margin: auto;
     text-align: center;
+    position: relative;
+    scrollbar-width:none;
 
     .carousel-value img,
     .carousel-value video {
@@ -55,14 +62,48 @@ const Carousel = styled.div`
         border-radius: 25px;
         position: relative;
         z-index: 2;
-        
     }
 
     .carousel-controls {
-        margin-top: 10px;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
+        button:nth-of-type(1) {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            z-index: 100;
+        }
+        button:nth-of-type(2) {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            z-index: 100;
+        }
+        .span-value {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            bottom: 25px;
+            z-index: 100;
+        }
+        
+        .span-change {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            bottom: 50px;
+            z-index: 100;
+            display:flex;
+            gap:5px;
+            span{
+                border:1px solid red;
+                padding:8px;
+                border-radius:50%;
+                cursor: pointer;
+            }
+            span.active{
+                background-color:black;
+            }
+           
+        }
     }
 `;
 export default Carrousel;

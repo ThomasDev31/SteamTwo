@@ -175,9 +175,8 @@ const StyledModal = styled.div`
     padding: 10px 100px 10px 100px;
     display: flex;
     flex-direction: column;
-
     height: 80%;
-
+    scrollbar-width:none;
     .top {
         display: flex;
         justify-content: space-between;
@@ -218,7 +217,7 @@ const StyledModal = styled.div`
         display: flex;
         justify-content: space-between;
         width: 100%;
-
+        
         color: white;
         .container-content {
             max-width: 25%;
@@ -316,6 +315,7 @@ const StyledModal = styled.div`
             border-radius: 25px;
             overflow: hidden;
             z-index: 0;
+            scrollbar-width:none;
             
               &::before {
             content: "";

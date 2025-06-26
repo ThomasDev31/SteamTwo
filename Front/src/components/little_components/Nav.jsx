@@ -15,7 +15,7 @@ const Nav = ({ category, setCategory }) => {
 							<li
 								key={category.title}
 								onClick={() => {
-									setCategory((s) => ({
+									setCategory(() => ({
 										section: section.sectionName,
 										cat: category.title,
 										id: category.id,

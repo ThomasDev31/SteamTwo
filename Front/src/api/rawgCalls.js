@@ -268,6 +268,7 @@ const rawgCalls = {
 						slug: p.platform?.slug,
 					})) || [],
 				price: generateRandomPrice(),
+				title_data: `Best game of all time`,
 			}));
 
 			return [{ result: result }, { error: null }];

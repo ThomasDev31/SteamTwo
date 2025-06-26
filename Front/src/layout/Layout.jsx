@@ -6,11 +6,11 @@ import { useState } from "react";
 import rawgCalls from "../api/rawgCalls";
 
 const Layout = () => {
-	const [category, setCategory] = useState("Last 30 days");
+	const [category, setCategory] = useState("");
 
 	return (
 		<StyledLayout className="layout">
-			<Header />
+			
 			<Main category={category} />
 			<Nav category={category} setCategory={setCategory} />
 		</StyledLayout>
@@ -22,7 +22,7 @@ const StyledLayout = styled.div`
 	min-height: 100vh;
 	color: white;
 	display: grid;
-	grid-template-rows: 100px auto;
+	
 	grid-template-columns: 300px auto;
 `;
 

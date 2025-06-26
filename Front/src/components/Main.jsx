@@ -8,7 +8,7 @@ import FilterSelect from "./little_components/FilterSelect";
 import { filterBy } from "../utils";
 
 const calls = [
-	{ name: "Last 30 days", call: rawgCalls.getAllGames },
+	{ name: "Last 30 days", call: rawgCalls.getAllGamesByMonth },
 	{ name: "This week", call: rawgCalls.getAllGamesByWeek },
 	{ name: "Next week", call: rawgCalls.getAllGamesNextWeek },
 	{ name: "Best of the year", call: rawgCalls.getAllGamesBestOfYear },
@@ -26,26 +26,51 @@ const Main = ({ category }) => {
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);
 	const [functionData, setFunctionData] = useState();
-	const [filter, setFilter] = useState("popularity");
 
 	const filteredDatas = filterBy(datas, filter);
 	console.log("Filtered data: ", filteredDatas);
-	const platformName = category?.cat || "Last 30 days";
-	console.log("Platforme:", platformName);
-	useEffect(() => {
-		// let matched = null
-		// if(category.section = "Platfomrs"){
 
-		// }
-		const matched = calls.find((k) => platformName === k.name);
+	useEffect(() => {
+		let matched;
+		if (category?.section === "Platforms") {
+			matched = {
+				name: "Platforms",
+				call: rawgCalls.getAllGamesByPlatform,
+				needsParam: true,
+			};
+		} else if (category?.section === "Genres") {
+			matched = {
+				name: "Genres",
+				call: rawgCalls.getAllGamesByCategory,
+				needsParam: true,
+			};
+		} else {
+			const standardCall = calls.find(
+				(k) => k.name === (category?.cat || "Last 30 days")
+			);
+			matched = {
+				call: standardCall.call,
+				needsParam: false,
+			};
+		}
 		setFunctionData(matched);
-		console.log(matched);
-	}, [platformName]);
+	}, [category?.cat || category?.section]);
 
 	const fetchdata = async () => {
-		setLoading(true);
+		if (!functionData) return;
 		try {
-			const response = await functionData?.call(category?.param);
+			let param;
+			setLoading(true);
+			if (functionData.name === "Platforms") {
+				param = category?.id;
+			} else if (functionData.name === "Genres") {
+				param = category?.cat?.toLowerCase();
+			}
+
+			const response = functionData.needsParam
+				? await functionData.call(param)
+				: await functionData.call();
+
 			setDatas(response?.[0]?.result || []);
 		} catch (err) {
 			setError(err.message);
@@ -53,20 +78,29 @@ const Main = ({ category }) => {
 			setLoading(false);
 		}
 	};
+
 	useEffect(() => {
 		if (functionData) {
 			fetchdata();
 			console.log(datas);
 		}
-	}, [functionData, category]);
-
+	}, [functionData]);
 	function GoToGamePage(id) {
 		console.log(`AH LALA, ce jeu ${id} a été cliqué !! `);
 	}
 	return (
 		<StyledMain>
-			<h2 className="category">Last 30 days</h2>
-			<FilterSelect value={filter} onChange={setFilter} />
+			{datas && !loading && (
+				<h2 className="category">
+					{category?.cat || category?.section || "Last 30 days"}
+				</h2>
+			)}
+
+			<button className="order-by">
+				<span>Order by: </span>
+				<span>Name </span>
+				<FontAwesomeIcon icon={faChevronDown} />
+			</button>
 
 			<div className="games-cards">
 				{loading && <p>Chargement des données</p>}
@@ -92,8 +126,9 @@ const Main = ({ category }) => {
 const StyledMain = styled.main`
 	display: flex;
 	flex-flow: column;
+	align-items: center;
 	margin-top: 15px;
-
+	position: relative;
 	.category {
 		font-size: 2.5rem;
 		font-weight: bolder;

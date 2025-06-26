@@ -12,11 +12,7 @@ const calls = [
     { name: "Best of the year", call: rawgCalls.getAllGamesBestOfYear },
     { name: "Popular in 2025", call: rawgCalls.getAllGamesMostPopularOfYear },
     { name: "All time top", call: rawgCalls.getAllGamesBestOfTime },
-    {
-        name: "Platforms",
-        call: (plat) => rawgCalls.getAllGamesByPlatform(plat),
-    },
-    { name: "Genres", call: (genre) => rawgCalls.getAllGamesByCategory(genre) },
+    
 ];
 
 const Main = ({ category }) => {
@@ -24,23 +20,50 @@ const Main = ({ category }) => {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
     const [functionData, setFunctionData] = useState();
-
+    
     const platformName = category?.cat || "Last 30 days";
-    console.log("Platforme:", platformName);
-    useEffect(() => {
-		// let matched = null
-		// if(category.section = "Platfomrs"){
 
-		// }
-        const matched = calls.find((k) => platformName === k.name);
+    useEffect(() => {
+		let matched = null
+		if(category?.section === "Platforms"){
+             matched = {
+                name: "Platforms",
+                call: rawgCalls.getAllGamesByPlatform,
+                needsParam: true,
+            };
+		}else if(category?.section === "Genres"){
+             matched = {
+                name: "Genres",
+                call: rawgCalls.getAllGamesByCategory,
+                needsParam: true,
+            };
+        }else{
+            const standardCall = calls.find((k) => k.name === category?.cat || "Last 30 days");
+            if (standardCall) {
+                matched = {
+                    call: standardCall.call,
+                    needsParam: false,
+                };
+            }
+        }
         setFunctionData(matched);
-        console.log(matched);
     }, [platformName]);
 
     const fetchdata = async () => {
-        setLoading(true)
+         if (!functionData) return;
         try {
-            const response = await functionData?.call(category?.param);
+            let param;
+            setLoading(true);
+            if(functionData.name === "Platforms"){
+                 param = category?.id; 
+            }else if(functionData.name === "Genres"){
+                param = category?.cat?.toLowerCase(); 
+            }
+            
+            const response = functionData.needsParam
+                ? await functionData.call(param)
+                : await functionData.call();
+
             setDatas(response?.[0]?.result || []);
         } catch (err) {
             setError(err.message);
@@ -128,6 +151,3 @@ const StyledMain = styled.main`
 `;
 
 export default Main;
-
-
-

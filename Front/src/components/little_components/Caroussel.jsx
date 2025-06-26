@@ -30,7 +30,7 @@ function Carrousel({ image, video }) {
                 </div>
 
                 <div className="carousel-controls">
-                    <button onClick={prev}>◀</button>
+                    <span onClick={prev} className="button-1">◀</span>
                     <div className="span-change">
                         {items.map((_, index) => (
                             <span key={index} onClick={() => slideTo(index)} className={index === current ? "active": ""}></span>
@@ -39,7 +39,7 @@ function Carrousel({ image, video }) {
                     <span className="span-value">
                         {current + 1} / {items.length}
                     </span>
-                    <button onClick={next}>▶</button>
+                    <span onClick={next} className="button-2">▶</span>
                 </div>
             </Carousel>
         </>
@@ -65,17 +65,21 @@ const Carousel = styled.div`
     }
 
     .carousel-controls {
-        button:nth-of-type(1) {
+        .button-1 {
             position: absolute;
-            left: 0;
+            left: 10px;
             top: 50%;
             z-index: 100;
+            font-size:2rem;
+            cursor: pointer;
         }
-        button:nth-of-type(2) {
+        .button-2 {
             position: absolute;
-            right: 0;
+            right: 10px;
             top: 50%;
             z-index: 100;
+            font-size:2rem;
+            cursor: pointer;
         }
         .span-value {
             position: absolute;
@@ -94,13 +98,13 @@ const Carousel = styled.div`
             display:flex;
             gap:5px;
             span{
-                border:1px solid red;
+                border:2px solid white;
                 padding:8px;
                 border-radius:50%;
                 cursor: pointer;
             }
             span.active{
-                background-color:black;
+                background-color:white;
             }
            
         }

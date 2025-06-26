@@ -20,9 +20,8 @@ const Main = ({ category }) => {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
     const [functionData, setFunctionData] = useState();
-    console.log(category)
+    
     const platformName = category?.cat || "Last 30 days";
-    console.log("Platforme:", platformName);
 
     useEffect(() => {
 		let matched = null
@@ -48,7 +47,6 @@ const Main = ({ category }) => {
             }
         }
         setFunctionData(matched);
-        console.log(matched);
     }, [platformName]);
 
     const fetchdata = async () => {
@@ -62,7 +60,6 @@ const Main = ({ category }) => {
                 param = category?.cat?.toLowerCase(); 
             }
             
-            console.log("param: ", param)
             const response = functionData.needsParam
                 ? await functionData.call(param)
                 : await functionData.call();

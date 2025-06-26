@@ -178,32 +178,6 @@ const StyledHeader = styled.header`
 		z-index: 1000;
 		animation: fadeIn 0.2s ease-out;
 	}
-
-	.search_results {
-		display: flex;
-		align-items: center;
-		padding: 12px 16px;
-		cursor: pointer;
-		border-bottom: 1px solid #eee;
-	}
-
-	.search_results:hover {
-		background-color: #f8f9fa;
-	}
-
-	.game-info {
-		flex: 1;
-		margin: 0;
-		font-size: 16px;
-		color: #666;
-		font-size: 14px;
-	}
-
-	.search_loading {
-		padding: 16px;
-		text-align: center;
-		color: #666;
-	}
 `;
 
 export default Header;

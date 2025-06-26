@@ -7,7 +7,7 @@ import GameCard from "./GameCard";
 import FilterSelect from "./little_components/FilterSelect";
 
 const calls = [
-	{ name: "Last 30 days", call: rawgCalls.getAllGames },
+	{ name: "Last 30 days", call: rawgCalls.getAllGamesByMonth },
 	{ name: "This week", call: rawgCalls.getAllGamesByWeek },
 	{ name: "Next week", call: rawgCalls.getAllGamesNextWeek },
 	{ name: "Best of the year", call: rawgCalls.getAllGamesBestOfYear },

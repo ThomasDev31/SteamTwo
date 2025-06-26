@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useNavigate, useParams } from "react-router";
+
 import rawgCalls from "../../api/rawgCalls";
 import styled from "styled-components";
 

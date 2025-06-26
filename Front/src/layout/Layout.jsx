@@ -12,7 +12,7 @@ const Layout = () => {
 			<Main category={category} />
 			<Nav category={category} setCategory={setCategory} />
 		</StyledLayout>
-	);
+	); 
 };
 
 const StyledLayout = styled.div`

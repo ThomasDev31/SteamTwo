@@ -6,6 +6,7 @@ import rawgCalls from "../api/rawgCalls";
 import GameCard from "./GameCard";
 import FilterSelect from "./little_components/FilterSelect";
 import { filterBy } from "../utils";
+import LoadingComponent from "./little_components/Loading";
 
 const calls = [
 	{ name: "Last 30 days", call: rawgCalls.getAllGamesByMonth },
@@ -104,7 +105,7 @@ const Main = ({ category }) => {
 				}}
 			/>
 			<div className="games-cards">
-				{loading && <p>Chargement des données</p>}
+				{loading && <LoadingComponent />}
 				{filteredDatas.length === 0 && !loading && (
 					<p>😕 Aucun jeu trouvé.</p>
 				)}
@@ -157,7 +158,6 @@ const StyledMain = styled.main`
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
 		gap: 30px;
-		width: 80vw;
 		padding: 30px;
 		padding-left: 0;
 	}

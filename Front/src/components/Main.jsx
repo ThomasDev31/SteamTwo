@@ -26,6 +26,7 @@ const Main = ({ category }) => {
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);
 	const [functionData, setFunctionData] = useState();
+	const [filter, setFilter] = useState("popularity");
 
 	const filteredDatas = filterBy(datas, filter);
 	console.log("Filtered data: ", filteredDatas);

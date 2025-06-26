@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import rawgCalls from "../api/rawgCalls";
 import GameCard from "./GameCard";
 import FilterSelect from "./little_components/FilterSelect";
+import { filterBy } from "../utils";
 
 const calls = [
 	{ name: "Last 30 days", call: rawgCalls.getAllGames },
@@ -27,6 +28,8 @@ const Main = ({ category }) => {
 	const [functionData, setFunctionData] = useState();
 	const [filter, setFilter] = useState("popularity");
 
+	const filteredDatas = filterBy(datas, filter);
+	console.log("Filtered data: ", filteredDatas);
 	const platformName = category?.cat || "Last 30 days";
 	console.log("Platforme:", platformName);
 	useEffect(() => {
@@ -53,6 +56,7 @@ const Main = ({ category }) => {
 	useEffect(() => {
 		if (functionData) {
 			fetchdata();
+			console.log(datas);
 		}
 	}, [functionData, category]);
 
@@ -66,10 +70,12 @@ const Main = ({ category }) => {
 
 			<div className="games-cards">
 				{loading && <p>Chargement des données</p>}
-				{datas.length === 0 && !loading && <p>😕 Aucun jeu trouvé.</p>}
+				{filteredDatas.length === 0 && !loading && (
+					<p>😕 Aucun jeu trouvé.</p>
+				)}
 				{!error &&
 					!loading &&
-					datas.map((game) => (
+					filteredDatas.map((game) => (
 						<GameCard
 							key={game.id}
 							title={game.title}

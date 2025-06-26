@@ -15,11 +15,10 @@ export const navContent = [
 				title: "Last 30 days",
 				icon: "fa-solid fa-star",
 			},
-			
+
 			{
 				title: "This week",
 				icon: "fa-solid fa-fire",
-				
 			},
 			{
 				title: "Next week",
@@ -36,7 +35,7 @@ export const navContent = [
 			},
 			{
 				title: "Popular in 2025",
-				icon: "fa-solid fa-chart-simple",				
+				icon: "fa-solid fa-chart-simple",
 			},
 			{
 				title: "All time top",
@@ -48,12 +47,12 @@ export const navContent = [
 		sectionName: "Platforms",
 		categories: [
 			{
-				id:1,
+				id: 1,
 				title: "PC",
 				icon: "fa-brands fa-windows",
 			},
 			{
-				id:2,
+				id: 2,
 				title: "PlayStation",
 				icon: "fa-brands fa-playstation",
 			},
@@ -79,47 +78,47 @@ export const navContent = [
 			},
 		],
 	},
-	
+
 	{
 		sectionName: "Genres",
 		categories: [
 			{
-				id:1,
+				id: 1,
 				title: "Action",
 				icon: "fa-solid fa-hand-fist",
 			},
 			{
-				id:2,
+				id: 2,
 				title: "Strategy",
 				icon: "fa-solid fa-chess-knight",
 			},
 			{
-				id:3,
+				id: 3,
 				title: "RPG",
 				icon: "fa-solid fa-skull-crossbones",
 			},
 			{
-				id:4,
+				id: 4,
 				title: "Shooter",
 				icon: "fa-solid fa-gun",
 			},
 			{
-				id:5,
+				id: 5,
 				title: "Adventure",
 				icon: "fa-solid fa-mountain",
 			},
 			{
-				id:6,
+				id: 6,
 				title: "Puzzle",
 				icon: "fa-solid fa-puzzle-piece",
 			},
 			{
-				id:7,
+				id: 7,
 				title: "Racing",
 				icon: "fa-solid fa-flag-checkered",
 			},
 			{
-				id:8,
+				id: 8,
 				title: "Sports",
 				icon: "fa-solid fa-volleyball",
 			},
@@ -127,5 +126,23 @@ export const navContent = [
 	},
 ];
 
+export const filterBy = (data, filter) => {
+	if (!data || !Array.isArray(data)) {
+		return [];
+	}
 
- 
+	switch (filter) {
+		case "name":
+			return data.sort((a, b) => a.title.localeCompare(b.title));
+		case "popularity":
+			return data.sort((a, b) => b.metacritic - a.metacritic);
+		case "release_date":
+			return data.sort(
+				(a, b) => new Date(b.releaseDate) - new Date(a.releaseDate)
+			);
+		case "rating":
+			return data.sort((a, b) => b.rating - a.rating);
+		default:
+			return data;
+	}
+};

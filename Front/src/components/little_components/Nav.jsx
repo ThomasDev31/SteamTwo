@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { navContent } from "../../data";
+import { navContent } from "../../utils";
 
 /*
  */
 
-const Nav = ( {category, setCategory}  ) => {
+const Nav = ({ category, setCategory }) => {
 	return (
 		<StyledNav>
 			{navContent.map((section) => (
@@ -12,11 +12,16 @@ const Nav = ( {category, setCategory}  ) => {
 					<h3>{section.sectionName}</h3>
 					<ul>
 						{section.categories.map((category) => (
-							<li key={category.title} onClick={() => { 
-								setCategory((s) => ({section:section.sectionName, cat:category.title, id:category.id}))
-								;
-								
-							}}>
+							<li
+								key={category.title}
+								onClick={() => {
+									setCategory((s) => ({
+										section: section.sectionName,
+										cat: category.title,
+										id: category.id,
+									}));
+								}}
+							>
 								<div className="container-icon">
 									<i className={category.icon}></i>
 								</div>
@@ -59,11 +64,11 @@ const StyledNav = styled.nav`
 		cursor: pointer;
 	}
 	.nav-section li .container-icon {
-		min-width:50px;
+		min-width: 50px;
 		background-color: rgb(32, 32, 32);
 		border-radius: 10px;
 		padding: 10px;
-		text-align:center;
+		text-align: center;
 		transition: color 0.3s ease, background-color 0.3s ease;
 	}
 	.nav-section li i {
@@ -72,7 +77,6 @@ const StyledNav = styled.nav`
 		background-color: rgb(32, 32, 32);
 		transition: color 0.3s ease, background-color 0.3s ease;
 	}
-	
 
 	.nav-section li:hover {
 		color: #f0f0f0;
@@ -81,7 +85,7 @@ const StyledNav = styled.nav`
 			color: #000000;
 			background-color: #f0f0f0;
 		}
-		.container-icon{
+		.container-icon {
 			background-color: #f0f0f0;
 		}
 	}

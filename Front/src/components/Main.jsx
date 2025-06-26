@@ -26,6 +26,7 @@ const Main = ({ category }) => {
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(true);
 	const [functionData, setFunctionData] = useState();
+	const [filter, setFilter] = useState("popularity");
 
 	const filteredDatas = filterBy(datas, filter);
 	console.log("Filtered data: ", filteredDatas);
@@ -96,12 +97,12 @@ const Main = ({ category }) => {
 				</h2>
 			)}
 
-			<button className="order-by">
-				<span>Order by: </span>
-				<span>Name </span>
-				<FontAwesomeIcon icon={faChevronDown} />
-			</button>
-
+			<FilterSelect
+				value={filter}
+				onChange={(newValue) => {
+					setFilter(newValue);
+				}}
+			/>
 			<div className="games-cards">
 				{loading && <p>Chargement des données</p>}
 				{filteredDatas.length === 0 && !loading && (
@@ -126,7 +127,6 @@ const Main = ({ category }) => {
 const StyledMain = styled.main`
 	display: flex;
 	flex-flow: column;
-	align-items: center;
 	margin-top: 15px;
 	position: relative;
 	.category {

@@ -46,7 +46,7 @@ const FilterSelect = ({ value, onChange }) => {
 			<button onClick={toggleDropdown}>
 				<span>Order by: </span>
 				<span>{correspondances[value]}</span>
-				<i class="fa-solid fa-circle-chevron-down"></i>
+				<i className="fa-solid fa-circle-chevron-down"></i>
 			</button>
 			{isOpen && (
 				<ul className="dropdown-menu">

@@ -80,9 +80,9 @@ const rawgCalls = {
 
 			const result = {
 				id: gameData.id,
-				releaseDate: r.released,
-				rating: r.rating,
-				metacritic: r.metacritic,
+				releaseDate: gameData.released,
+				rating: gameData.rating,
+				metacritic: gameData.metacritic,
 				title: gameData.name,
 				platform:
 					gameData.parent_platforms?.map((p) => ({

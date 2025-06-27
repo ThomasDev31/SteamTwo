@@ -76,7 +76,11 @@ const rawgCalls = {
 				gameId
 			);
 	
-
+			const generateRandomPrice = () => {
+				const prices = [39.49, 23.99, 59.99, 12.5, 66.29];
+				const randomIndex = Math.floor(Math.random() * prices.length);
+				return prices[randomIndex];
+			};
 			const result = {
 				id: gameData.id,
 				releaseDate: gameData.released,
@@ -125,6 +129,7 @@ const rawgCalls = {
 					image: s.image,
 					type: "image",
 				})),
+				price : generateRandomPrice(),
 			};
 
 			return [{ result: result }, { error: null }];

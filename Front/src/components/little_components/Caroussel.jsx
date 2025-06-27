@@ -82,7 +82,7 @@ const Carousel = styled.div`
         height: 700px;
         overflow: hidden;
         display: flex;
-
+         border-radius: 25px;
         .carousel-item {
             position: absolute;
             top: 0;
@@ -90,6 +90,7 @@ const Carousel = styled.div`
             width: 100%;
             height: 100%;
             opacity: 0;
+           
             transform: translateX(0px);
             transition: transform 0.5s ease, opacity 0.5s ease;
             z-index: 1;

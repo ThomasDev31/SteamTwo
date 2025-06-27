@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import rawgCalls from "../../api/rawgCalls";
 import styled from "styled-components";
 import Carrousel from "./Caroussel";
+import Loading from "./Loading";
 function Game() {
     const [datas, setDatas] = useState(null);
     const [error, setError] = useState("");
@@ -34,7 +35,6 @@ function Game() {
     }, [id]);
     console.log(datas);
     if (error) return <div>{error}</div>;
-    if (loading) return <div>Loading ...</div>;
 
     return (
         <>
@@ -42,7 +42,9 @@ function Game() {
                 {error && <div>{error}</div>}
                 {loading && (
                     <div>
-                        <h2>Loading ...</h2>
+                        <h2>
+                            <Loading />
+                        </h2>
                     </div>
                 )}
                 {!error && !loading && datas && (
@@ -59,7 +61,10 @@ function Game() {
                         </div>
 
                         <div className="container-element-parent">
-                            <Carrousel image={datas.screenshoot} video={datas.trailers} />
+                            <Carrousel
+                                image={datas.screenshoot}
+                                video={datas.trailers}
+                            />
                             <div className="container-content">
                                 <div className="container-description">
                                     <h4>Description</h4>
@@ -159,6 +164,15 @@ function Game() {
                                         ></i>
                                     </div>
                                 </div>
+                                <div
+                                    className="container-cart"
+                                    onClick={() => {}}
+                                >
+                                    <div className="cart">
+                                        <p>{datas.price}</p>
+                                        <p>Add to cart +</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </>
@@ -176,7 +190,7 @@ const StyledModal = styled.div`
     display: flex;
     flex-direction: column;
     height: 80%;
-    scrollbar-width:none;
+    scrollbar-width: none;
     .top {
         display: flex;
         justify-content: space-between;
@@ -217,11 +231,11 @@ const StyledModal = styled.div`
         display: flex;
         justify-content: space-between;
         width: 100%;
-        
+
         color: white;
         .container-content {
             max-width: 25%;
-
+            position: relative;
             .container-description {
                 position: relative;
                 h4 {
@@ -266,10 +280,11 @@ const StyledModal = styled.div`
                 margin-top: 5px;
                 border-radius: 10px;
                 max-height: 300px;
-                overflow-y: scroll;
+                overflow-y: hidden;
                 scrollbar-width: none;
                 background-color: rgb(32, 32, 32);
                 position: relative;
+                
                 .click-more {
                     display: flex;
                     justify-content: flex-end;
@@ -306,6 +321,28 @@ const StyledModal = styled.div`
                     }
                 }
             }
+            .container-cart {
+               
+                border-radius: 10px;
+                
+                max-height: 300px;
+                overflow-y: scroll;
+                scrollbar-width: none;
+                background-color: rgb(32, 32, 32);
+                position: absolute;
+                bottom: 0px;
+                width: 95%;
+                display: flex;
+                box-sizing:border-box;
+                margin: 10px;
+                    justify-content: space-between;
+                .cart {
+                     padding: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    width:100%;
+                }
+            }
         }
 
         .image {
@@ -315,27 +352,25 @@ const StyledModal = styled.div`
             border-radius: 25px;
             overflow: hidden;
             z-index: 0;
-            scrollbar-width:none;
-            
-              &::before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            bottom: -20px;
-            background: radial-gradient(
-                circle,
-                rgba(255, 255, 255, 0) 80%,
-                rgba(255, 255, 255, 0.6) 
-            );
-            border-radius: 35px;
-            pointer-events: none;
-            z-index: 10;
+            scrollbar-width: none;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                right: -20px;
+                bottom: -20px;
+                background: radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0) 80%,
+                    rgba(255, 255, 255, 0.6)
+                );
+                border-radius: 35px;
+                pointer-events: none;
+                z-index: 10;
+            }
         }
-        }
-      
-        
     }
 `;
 export default Game;

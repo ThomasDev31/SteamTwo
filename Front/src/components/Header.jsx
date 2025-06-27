@@ -167,10 +167,14 @@ const StyledHeader = styled.header`
 
 	@media (min-width: 600px) {
 		grid-template-areas: "title-logo search-container cart";
-		grid-template-columns: auto 1fr auto;
+		grid-template-columns: auto minmax(0, 600px) auto;
 		grid-template-rows: 100px;
 		gap: 35px;
 		padding-bottom: 0;
+
+		.search-container {
+			align-self: center;
+		}
 	}
 
 	.title-logo {
@@ -203,6 +207,7 @@ const StyledHeader = styled.header`
 			top: 50%;
 			right: 8px;
 			transform: translateY(-50%);
+			font-size: 1.5rem;
 			cursor: pointer;
 		}
 	}

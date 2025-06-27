@@ -78,7 +78,6 @@ const Main = ({ category }) => {
 	useEffect(() => {
 		if (functionData) {
 			fetchdata();
-			
 		}
 	}, [functionData]);
 	function GoToGamePage(id) {
@@ -167,6 +166,7 @@ const StyledMain = styled.main`
 
 	@media (min-width: 700px) {
 		align-items: flex-start;
+	}
 `;
 
 export default Main;

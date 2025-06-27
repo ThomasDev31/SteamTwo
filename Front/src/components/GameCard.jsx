@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import PlatGame from "./little_components/PlatGame";
 import { useNavigate } from "react-router";
-
+import { CartContext }  from "../components/contexts/CartContext"
+import { useContext } from "react";
 const GameCard = ({ title, price, image, platforms, id }) => {
     const navigate = useNavigate();
+const { addItemToCart, isInCart, cart } = useContext(CartContext);
 
+	const inCart = isInCart(id);
     return (
         <>
             <StyledGameCard className="Game_Card">
@@ -16,7 +19,13 @@ const GameCard = ({ title, price, image, platforms, id }) => {
                 >
                     <img src={image} alt={`La photo du jeu ${title}`} />
                 </div>
-                <div className="Price_Block" onClick={() => console.log(price)}>
+                <div className="Price_Block" onClick={() => {
+										addItemToCart({
+											id: id,
+											title: title,
+											image: image,
+											price: price,
+										})}}>
                     <div className="Price_CTA">Add to cart +</div>
                     <div className="Price">{price}</div>
                 </div>

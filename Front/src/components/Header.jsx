@@ -121,16 +121,12 @@ const Header = () => {
 											>
 												{game.background_image && (
 													<img
-														src={
-															game.background_image
-														}
+														src={game.background_image}
 														alt={game.name}
 														className="game_image"
 													/>
 												)}
-												<div className="game_info">
-													{game.name}
-												</div>
+												<div className="game_info">{game.name}</div>
 											</div>
 										);
 									})}
@@ -221,18 +217,17 @@ const StyledHeader = styled.header`
 		background: inherit;
 		border: 0;
 		cursor: pointer;
-		.logo{
-			transition: color .4s ease-in-out;
+		.logo {
+			transition: color 0.4s ease-in-out;
 		}
-		
-		&:hover .logo{
-			color:#5d6d7e ;
+
+		&:hover .logo {
+			color: #5d6d7e;
 		}
 	}
 
-		svg {
-			font-size: 2.1rem;
-		}
+	svg {
+		font-size: 2.1rem;
 	}
 
 	.overlay_modal {
@@ -278,7 +273,7 @@ const StyledHeader = styled.header`
 		border-radius: 500px;
 	}
 
-	.custom_scrollbar::-webkit-scrollbar-track{
+	.custom_scrollbar::-webkit-scrollbar-track {
 		background: #f1f1f1;
 		border-radius: 10px;
 	}
@@ -291,10 +286,9 @@ const StyledHeader = styled.header`
 		background-clip: content-box;
 	}
 
-	.custom-scrollbar::-webkit-scrollbar-thumb:hover
-	{
+	.custom-scrollbar::-webkit-scrollbar-thumb:hover {
 		background: #f1f1f1;
-		background-clip : content-box;
+		background-clip: content-box;
 	}
 
 	.search_loading {

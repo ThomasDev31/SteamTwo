@@ -98,7 +98,7 @@ const Header = () => {
 					recherche en cours */}
 			{modalOpen && (
 				<div className="overlay_modal" onClick={CloseModal}>
-					<div className="search_modal">
+					<div className="search_modal custom_scrollbar">
 						{isLoading && (
 							<div className="search_loading">
 								Loading en cours de chargement ...
@@ -109,7 +109,7 @@ const Header = () => {
 							games &&
 							games.results &&
 							games.results.length > 0 && (
-								<div className="search_results">
+								<div className="search_results custom_scrollbar">
 									{games.results.map((game) => {
 										return (
 											<div
@@ -265,6 +265,36 @@ const StyledHeader = styled.header`
 		width: 90%;
 		max-width: 600px;
 		overflow-y: auto;
+	}
+
+	/* Changer le Style de la scrollbar dans tous les browsers */
+	.custom_scrollbar {
+		scrollbar-width: 20px;
+		scrollbar-color: rgb(32, 32, 32);
+	}
+
+	.custom_scrollbar::-webkit-scrollbar {
+		background: rgb(32, 32, 32);
+		border-radius: 500px;
+	}
+
+	.custom_scrollbar::-webkit-scrollbar-track{
+		background: #f1f1f1;
+		border-radius: 10px;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		background: #888;
+		border-radius: 500px;
+
+		border: 2px solid transparent;
+		background-clip: content-box;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb:hover
+	{
+		background: #f1f1f1;
+		background-clip : content-box;
 	}
 
 	.search_loading {

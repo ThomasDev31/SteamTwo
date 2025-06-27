@@ -88,7 +88,7 @@ const StyledNav = styled.nav`
 			background-color: #f0f0f0;
 		}
 	}
-	@media (min-width: 500px) {
+	@media (min-width: 700px) {
 		grid-row: 2 / -1;
 	}
 `;

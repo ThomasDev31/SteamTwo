@@ -65,7 +65,7 @@ const Header = () => {
 
 	let navigate = useNavigate();
 
-	function GoToGameDetail(id){
+	function GoToGameDetail(id) {
 		navigate(`/game/${id}`);
 	}
 
@@ -112,15 +112,25 @@ const Header = () => {
 								<div className="search_results">
 									{games.results.map((game) => {
 										return (
-											<div key={game.slug} className="game_container" onClick={() => {GoToGameDetail(game.id)}}>
+											<div
+												key={game.slug}
+												className="game_container"
+												onClick={() => {
+													GoToGameDetail(game.id);
+												}}
+											>
 												{game.background_image && (
 													<img
-														src={game.background_image}
+														src={
+															game.background_image
+														}
 														alt={game.name}
 														className="game_image"
 													/>
 												)}
-												<div className="game_info">{game.name}</div>
+												<div className="game_info">
+													{game.name}
+												</div>
 											</div>
 										);
 									})}
@@ -132,7 +142,7 @@ const Header = () => {
 
 			<div className="cart">
 				<button onClick={toggleCart}>
-					<FontAwesomeIcon icon={faCartShopping} color="white" size="2x" />
+					<FontAwesomeIcon icon={faCartShopping} color="white" />
 				</button>{" "}
 				{/* temporary */}
 			</div>
@@ -141,22 +151,41 @@ const Header = () => {
 };
 
 const StyledHeader = styled.header`
-	display: flex;
-	justify-content: space-between;
 	padding: 25px 30px;
-	gap: 35px;
+	display: grid;
 	align-items: center;
+	grid-template-areas:
+		"title-logo cart"
+		"search-container search-container";
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 100px 1fr;
+
+	@media (min-width: 600px) {
+		grid-template-areas: "title-logo search-container cart";
+		grid-template-columns: auto 1fr auto;
+		grid-template-rows: 100px;
+		gap: 35px;
+		padding-bottom: 0;
+	}
 
 	.title-logo {
 		img {
 			height: 100px;
-			margin: -20px 0;
+			margin: -20px -11px;
 		}
+
+		grid-area: title-logo;
 	}
 
+	.search-container {
+		display: flex;
+		align-items: center;
+		grid-area: search-container;
+		width: 100%;
+	}
 	.search-bar {
 		position: relative;
-		width: 300px;
+		width: 100%;
 		input {
 			font-family: inherit;
 			padding: 8px 15px;
@@ -173,20 +202,19 @@ const StyledHeader = styled.header`
 		}
 	}
 
+	.cart {
+		grid-area: cart;
+		justify-self: end;
+	}
+
 	.cart button {
 		background: inherit;
 		border: 0;
 		cursor: pointer;
-	}
 
-	@media (min-width: 500px) {
-		grid-column: 1 / -1;
-	}
-
-	.search-container {
-		position: relative;
-		width: 100%;
-		max-width: 400px;
+		svg {
+			font-size: 2.1rem;
+		}
 	}
 
 	.overlay_modal {

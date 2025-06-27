@@ -131,6 +131,8 @@ const StyledMain = styled.main`
 	flex-flow: column;
 	margin-top: 15px;
 	position: relative;
+	align-items: center;
+
 	.category {
 		font-size: 2.5rem;
 		font-weight: bolder;
@@ -157,14 +159,20 @@ const StyledMain = styled.main`
 
 	.games-cards {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 30px;
 		padding: 30px;
-		padding-left: 0;
+		@media (min-width: 700px) {
+			grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+			padding-left: 0;
+		}
 	}
 	GameCard:hover {
 		transform: scale(1.2);
 	}
+
+	@media (min-width: 700px) {
+		align-items: flex-start;
 `;
 
 export default Main;

@@ -20,8 +20,11 @@ const StyledLayout = styled.div`
 	min-height: 100vh;
 	color: white;
 	display: grid;
+	grid-template-columns: 1fr;
 
-	grid-template-columns: 300px auto;
+	@media (min-width: 700px) {
+		grid-template-columns: 300px auto;
+	}
 `;
 
 export default Layout;

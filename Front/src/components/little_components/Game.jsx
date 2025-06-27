@@ -174,12 +174,15 @@ function Game() {
 								<div
 									className="container-cart"
 									onClick={() => {
-										addItemToCart({
-											id: datas.id,
-											title: datas.title,
-											image: datas.screenshoot[0].image,
-											price: datas.price,
-										});
+										if (!inCart) {
+											addItemToCart({
+												id: datas.id,
+												title: datas.title,
+												image: datas.screenshoot[0]
+													.image,
+												price: datas.price,
+											});
+										}
 									}}
 								>
 									<div

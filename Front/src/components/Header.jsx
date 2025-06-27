@@ -34,13 +34,17 @@ const Header = () => {
 	async function SearchTheGames(name) {
 		setIsLoading(true);
 		console.log("searchedEntries : ", searchedEntries);
+		// FORCER L'OUVERTURE pour tester
+		//setModalOpen(true);
 		try {
 			const response = await rawgParams.getGameBySearch(name);
+
 			const data = response.gameData;
-			console.log("DATA : ", data);
 			setGames(data);
-			if (data.length > 0) {
+			if (data && data.results && data.results.length > 0) {
 				setModalOpen(true);
+			} else {
+				setModalOpen(false);
 			}
 		} catch (error) {
 			console.error("Error game search");
@@ -50,6 +54,12 @@ const Header = () => {
 		} finally {
 			setIsLoading(false);
 		}
+	}
+
+	function closeModal() {
+		setModalOpen(false);
+		setSearchedEntries("");
+		setGames([]);
 	}
 
 	return (
@@ -75,10 +85,12 @@ const Header = () => {
 					/>
 				</div>
 			</div>
+
+			{/* DEBUG: Affichage conditionnel avec logs */}
 			{/* ICI La logique de la modal qui s'ouvre comme ça quand on a une
 					recherche en cours */}
 			{modalOpen && (
-				<div className="overlay_modal">
+				<div className="overlay_modal" onClick={closeModal}>
 					<div className="search_modal">
 						{isLoading && (
 							<div className="search_loading">
@@ -86,22 +98,27 @@ const Header = () => {
 							</div>
 						)}
 
-						{!isLoading && games.length > 0 && (
-							<div className="search_results">
-								{games.results.map((game) => {
-									<div key={game.slug} className="game_container">
-										{game.background_image && (
-											<img
-												src={game.background_image}
-												alt={game.name}
-												className="game-thumb"
-											/>
-										)}
-										<div className="game_info">{game.name}</div>
-									</div>;
-								})}
-							</div>
-						)}
+						{!isLoading &&
+							games &&
+							games.results &&
+							games.results.length > 0 && (
+								<div className="search_results">
+									{games.results.map((game) => {
+										return (
+											<div key={game.slug} className="game_container">
+												{game.background_image && (
+													<img
+														src={game.background_image}
+														alt={game.name}
+														className="game_image"
+													/>
+												)}
+												<div className="game_info">{game.name}</div>
+											</div>
+										);
+									})}
+								</div>
+							)}
 					</div>
 				</div>
 			)}
@@ -177,6 +194,68 @@ const StyledHeader = styled.header`
 		justify-content: center;
 		z-index: 1000;
 		animation: fadeIn 0.2s ease-out;
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.search_modal {
+		background: white;
+		border-radius: 8px;
+		padding: 20px;
+		max-height: 500px;
+		width: 90%;
+		max-width: 600px;
+		overflow-y: auto;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.search_loading {
+		text-align: center;
+		padding: 20px;
+		font-size: 16px;
+	}
+
+	.search_results {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	.game_container {
+		display: flex;
+		gap: 15px;
+		padding: 10px;
+		border: 1px solid #eee;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.2s;
+
+		&:hover {
+			background-color: #f5f5f5;
+		}
+	}
+
+	.game_image {
+		width: 80px;
+		height: 60px;
+		object-fit: cover;
+		border-radius: 4px;
+	}
+
+	.game_info {
+		display: flex;
+		align-items: center;
+		font-weight: 500;
+	}
+	.no_results {
+		text-align: center;
+		padding: 20px;
+		color: #666;
 	}
 `;
 

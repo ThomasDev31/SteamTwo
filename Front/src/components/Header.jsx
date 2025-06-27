@@ -107,22 +107,15 @@ const Header = () => {
 								<div className="search_results">
 									{games.results.map((game) => {
 										return (
-											<div
-												key={game.slug}
-												className="game_container"
-											>
+											<div key={game.slug} className="game_container">
 												{game.background_image && (
 													<img
-														src={
-															game.background_image
-														}
+														src={game.background_image}
 														alt={game.name}
 														className="game_image"
 													/>
 												)}
-												<div className="game_info">
-													{game.name}
-												</div>
+												<div className="game_info">{game.name}</div>
 											</div>
 										);
 									})}
@@ -134,11 +127,7 @@ const Header = () => {
 
 			<div className="cart">
 				<button onClick={toggleCart}>
-					<FontAwesomeIcon
-						icon={faCartShopping}
-						color="white"
-						size="2x"
-					/>
+					<FontAwesomeIcon icon={faCartShopping} color="white" size="2x" />
 				</button>{" "}
 				{/* temporary */}
 			</div>
@@ -218,14 +207,14 @@ const StyledHeader = styled.header`
 	}
 
 	.search_modal {
-		background: white;
+		background: rgb(32, 32, 32);
 		border-radius: 8px;
 		padding: 20px;
 		max-height: 500px;
 		width: 90%;
 		max-width: 600px;
 		overflow-y: auto;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+		box-shadow: 0 4px 20px rgb(32, 32, 32);
 	}
 
 	.search_loading {
@@ -243,13 +232,14 @@ const StyledHeader = styled.header`
 		display: flex;
 		gap: 15px;
 		padding: 10px;
-		border: 1px solid #eee;
 		border-radius: 5px;
 		cursor: pointer;
+		color: #f0f0f0;
 		transition: background-color 0.2s;
 
 		&:hover {
-			background-color: #f5f5f5;
+			background-color: #f0f0f0;
+			color: #000000;
 		}
 	}
 

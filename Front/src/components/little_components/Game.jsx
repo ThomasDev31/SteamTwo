@@ -18,7 +18,6 @@ function Game() {
 	const { addItemToCart, isInCart, cart } = useContext(CartContext);
 
 	const inCart = isInCart(id);
-	console.log(cart, inCart);
 
 	const fetchData = async () => {
 		if (id) {
@@ -40,7 +39,7 @@ function Game() {
 	useEffect(() => {
 		fetchData();
 	}, [id]);
-	console.log(datas);
+
 	if (error) return <div>{error}</div>;
 
 	return (
@@ -71,8 +70,9 @@ function Game() {
 							<Carrousel
 								image={datas.screenshoot}
 								video={datas.trailers}
+								className="max-width"
 							/>
-							<div className="container-content">
+							<div className="container-content max-width">
 								<div className="container-description">
 									<h4>Description</h4>
 									<div className="paragraphe">
@@ -174,15 +174,12 @@ function Game() {
 								<div
 									className="container-cart"
 									onClick={() => {
-										if (!inCart) {
-											addItemToCart({
-												id: datas.id,
-												title: datas.title,
-												image: datas.screenshoot[0]
-													.image,
-												price: datas.price,
-											});
-										}
+										addItemToCart({
+											id: datas.id,
+											title: datas.title,
+											image: datas.screenshoot[0].image,
+											price: datas.price,
+										});
 									}}
 								>
 									<div
@@ -248,10 +245,10 @@ const StyledModal = styled.div`
 		}
 		.return:hover {
 			i {
-				color: blue;
+				color: #5d6d7e;
 			}
 			h3 {
-				color: blue;
+				color: #5d6d7e;
 			}
 		}
 	}
@@ -265,8 +262,11 @@ const StyledModal = styled.div`
 		.container-content {
 			max-width: 25%;
 			position: relative;
+			display: flex;
+			flex-direction: column;
 			.container-description {
 				position: relative;
+
 				h4 {
 					text-align: center;
 				}
@@ -348,23 +348,24 @@ const StyledModal = styled.div`
 						opacity: 1;
 						height: 250px;
 					}
+					a {
+						color: #5d6d7e;
+						&:hover {
+							color: white;
+						}
+					}
 				}
 			}
 			.container-cart {
-				cursor: pointer;
+				padding: 10px;
 				border-radius: 10px;
-
+				margin: 10px;
+				margin-bottom: 5px;
 				max-height: 300px;
 				overflow-y: scroll;
 				scrollbar-width: none;
 				background-color: rgb(32, 32, 32);
-				position: absolute;
-				bottom: 0px;
-				width: 95%;
-				display: flex;
-				box-sizing: border-box;
-				margin: 10px;
-				justify-content: space-between;
+				bottom: 150px;
 				.cart {
 					padding: 10px;
 					display: flex;
@@ -405,6 +406,26 @@ const StyledModal = styled.div`
 				border-radius: 35px;
 				pointer-events: none;
 				z-index: 10;
+			}
+		}
+	}
+	@media screen and (max-width: 1020px) {
+		display: flex;
+		padding: 10px;
+		.top {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+		.container-element-parent {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			.max-width {
+				max-width: 100%;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
 			}
 		}
 	}

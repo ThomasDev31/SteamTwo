@@ -142,7 +142,12 @@ const Header = () => {
 
 			<div className="cart">
 				<button onClick={toggleCart}>
-					<FontAwesomeIcon icon={faCartShopping} color="white" />
+					<FontAwesomeIcon
+						icon={faCartShopping}
+						color="white"
+						size="2x"
+						className="logo"
+					/>
 				</button>{" "}
 				{/* temporary */}
 			</div>
@@ -211,6 +216,14 @@ const StyledHeader = styled.header`
 		background: inherit;
 		border: 0;
 		cursor: pointer;
+		.logo{
+			transition: color .4s ease-in-out;
+		}
+		
+		&:hover .logo{
+			color:#5d6d7e ;
+		}
+	}
 
 		svg {
 			font-size: 2.1rem;

@@ -418,7 +418,7 @@ const rawgCalls = {
 
 			const gameData = await response.json();
 
-			console.log(gameData);
+			
 			if (gameData.count === 0 || !gameData.results) {
 				return { error: "Aucun jeux n'a été trouvés", gameData: null };
 			}

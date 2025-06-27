@@ -1,29 +1,62 @@
 import styled from "styled-components";
 import PlatGame from "./little_components/PlatGame";
 import { useNavigate } from "react-router";
-
+import { CartContext } from "../components/contexts/CartContext";
+import { useContext } from "react";
 const GameCard = ({ title, price, image, platforms, id }) => {
 	const navigate = useNavigate();
+	const { addItemToCart, isInCart, cart } = useContext(CartContext);
 
+	const inCart = isInCart(id);
 	return (
 		<>
-			<StyledGameCard
-				className="Game_Card"
-				onClick={() => {
-					navigate(`/game/${id}`);
-				}}
-			>
-				<div className="img">
+			<StyledGameCard className="Game_Card">
+				<div
+					className="img"
+					onClick={() => {
+						navigate(`/game/${id}`);
+					}}
+				>
 					<img src={image} alt={`La photo du jeu ${title}`} />
 				</div>
-				<div className="Price_Block">
-					<div className="Price_CTA">Add to cart +</div>
-					<div className="Price">{price}</div>
+				<div
+					className="Price_Block"
+					onClick={() => {
+						addItemToCart({
+							id: id,
+							title: title,
+							image: image,
+							price: price,
+						});
+					}}
+				>
+					<div className={inCart ? "cart active" : "cart"}>
+						<p>
+							{!inCart ? (
+								"Add to cart +"
+							) : (
+								<i className="fa-solid fa-check"></i>
+							)}
+						</p>
+						<p>{!inCart ? price : "In cart!"}</p>
+					</div>
 				</div>
-				<div className="Platforms">
+				<div
+					className="Platforms"
+					onClick={() => {
+						navigate(`/game/${id}`);
+					}}
+				>
 					<PlatGame platform={platforms || {}} />
 				</div>
-				<h2 className="Game_Title">{title}</h2>
+				<h2
+					className="Game_Title"
+					onClick={() => {
+						navigate(`/game/${id}`);
+					}}
+				>
+					{title}
+				</h2>
 			</StyledGameCard>
 		</>
 	);
@@ -51,6 +84,21 @@ const StyledGameCard = styled.div`
 		justify-content: space-between;
 		margin: 5px 10px;
 		font-size: 1.2rem;
+		z-index: 10;
+		position: relative;
+		.cart {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
+		.cart.active {
+			justify-content: flex-start;
+			gap: 10px;
+			color: #059905;
+			i {
+				font-size: 1.2rem;
+			}
+		}
 	}
 	.Platforms {
 		display: flex;

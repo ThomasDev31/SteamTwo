@@ -40,7 +40,6 @@ const Cart = () => {
 						<div className="cart-item" key={item.id}>
 							<div className="content">
 								<img src={item.image} alt="sample" />{" "}
-								{console.log(item)}
 								<div className="info">
 									<p>{item.title}</p>
 									<p>{item.price}</p>

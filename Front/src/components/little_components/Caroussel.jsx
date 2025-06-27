@@ -120,7 +120,7 @@ const Carousel = styled.div`
             position: absolute;
             left: 10px;
             top: 50%;
-            z-index: 100;
+            z-index: 2;
             font-size: 2rem;
             cursor: pointer;
         }
@@ -128,7 +128,7 @@ const Carousel = styled.div`
             position: absolute;
             right: 10px;
             top: 50%;
-            z-index: 100;
+            z-index: 2;
             font-size: 2rem;
             cursor: pointer;
         }
@@ -137,7 +137,7 @@ const Carousel = styled.div`
             left: 50%;
             transform: translate(-50%);
             bottom: 25px;
-            z-index: 100;
+            z-index: 2;
         }
 
         .span-change {
@@ -145,7 +145,7 @@ const Carousel = styled.div`
             left: 50%;
             transform: translate(-50%);
             bottom: 50px;
-            z-index: 100;
+            z-index: 2;
             display: flex;
             gap: 5px;
             span {

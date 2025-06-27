@@ -13,7 +13,7 @@ const Layout = () => {
 			<Nav category={category} setCategory={setCategory} />
 			<Cart />
 		</StyledLayout>
-	);
+	); 
 };
 
 const StyledLayout = styled.div`

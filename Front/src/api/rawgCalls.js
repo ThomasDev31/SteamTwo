@@ -75,15 +75,19 @@ const rawgCalls = {
 			const responseScreenShots = await rawgParams.getGameScreenShots(
 				gameId
 			);
-			console.log();
-			console.log(responseScreenShots);
+	
 
 			const result = {
 				id: gameData.id,
-				releaseDate: r.released,
-				rating: r.rating,
-				metacritic: r.metacritic,
+				releaseDate: gameData.released,
+				rating: gameData.rating,
+				metacritic: gameData.metacritic,
 				title: gameData.name,
+				website: gameData.website,
+				genres: gameData.genres?.map(g => ({
+					id:g.id,
+					name: g.name,
+				})),
 				platform:
 					gameData.parent_platforms?.map((p) => ({
 						id: p.platform?.id,
@@ -91,6 +95,9 @@ const rawgCalls = {
 					})) || [],
 				description: gameData.description_raw.split("Español")[0],
 				date: gameData.released,
+				publisher : gameData.publishers?.map(p => (
+					{name: p.name}
+				)),
 				stores:
 					gameData.stores?.map((s) => ({
 						id: s.store.id,
@@ -111,10 +118,12 @@ const rawgCalls = {
 					id: m.id,
 					name: m.name,
 					movie: m.data,
-				})),
+					type: "movie",
+				})) || [],
 				screenshoot: responseScreenShots.data?.map((s) => ({
 					id: s.id,
 					image: s.image,
+					type: "image",
 				})),
 			};
 

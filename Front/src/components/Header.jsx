@@ -214,7 +214,6 @@ const StyledHeader = styled.header`
 		width: 90%;
 		max-width: 600px;
 		overflow-y: auto;
-		box-shadow: 0 4px 20px rgb(32, 32, 32);
 	}
 
 	.search_loading {

@@ -9,9 +9,11 @@ const Cart = () => {
 		useContext(CartContext);
 	const ref = useRef();
 
-	const totalPrice = cart.reduce((total, item) => {
-		return total + item.price * (item.quantity || 1);
-	}, 0);
+	const totalPrice = cart
+		.reduce((total, item) => {
+			return total + item.price * (item.quantity || 1);
+		}, 0)
+		.toFixed(2);
 
 	useClickOutside(ref, () => {
 		if (isOpen) {
@@ -29,7 +31,7 @@ const Cart = () => {
 			<StyledCart ref={ref} className={isOpen ? "open" : ""}>
 				<div className="top">
 					<h2>
-						<span>0</span> Games
+						<span>{cart.length}</span> Games
 					</h2>
 					<button onClick={clearCart}>Clear</button>
 				</div>
@@ -37,20 +39,21 @@ const Cart = () => {
 					{cart.map((item) => (
 						<div className="cart-item" key={item.id}>
 							<div className="content">
-								<img src={Sample} alt="sample" />
+								<img src={item.image} alt="sample" />{" "}
+								{console.log(item)}
 								<div className="info">
 									<p>{item.title}</p>
 									<p>{item.price}</p>
 								</div>
 							</div>
 							<button onClick={() => removeItemFromCart(item.id)}>
-								Remove
+								<i class="fa-solid fa-trash-can"></i>
 							</button>
 						</div>
 					))}
 				</div>
 				<p className="total-price">
-					Total price: <span>{totalPrice}</span>
+					Total price: <span>{totalPrice + "$"}</span>
 				</p>
 			</StyledCart>
 		</>
@@ -60,15 +63,16 @@ const Cart = () => {
 const StyledCart = styled.div`
 	position: fixed;
 	top: 0;
-	right: -320px;
+	right: -350px;
 	transition: right 0.3s ease-in-out;
-	width: 320px;
+	width: 350px;
 	height: 100vh;
 	background: rgb(32, 32, 32);
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	z-index: 20;
 
 	h2 {
 		color: white;
@@ -110,7 +114,7 @@ const StyledCart = styled.div`
 		margin-top: 15px;
 		display: flex;
 		flex-direction: column;
-		gap: 15px;
+		gap: 20px;
 		overflow-y: auto;
 		scrollbar-width: none;
 		flex: 1 1 0%;
@@ -119,22 +123,23 @@ const StyledCart = styled.div`
 		}
 
 		.cart-item {
-			background: rgb(50, 50, 50);
-			padding: 10px;
-			border-radius: 10px;
 			display: flex;
 			flex-direction: column;
-			gap: 8px;
 
 			.content {
+				border-radius: 10px;
+				padding: 10px;
+				background: rgb(50, 50, 50);
 				display: flex;
 				gap: 25px;
 				justify-content: space-between;
+				align-items: center;
 
 				.info {
-					margin-top: 10px;
 					padding-right: 5px;
-					font-weight: 400;
+					font-weight: 300;
+					color: white;
+					word-wrap: break-word;
 
 					p:nth-child(2) {
 						color: rgb(255, 255, 255, 0.5);
@@ -153,9 +158,13 @@ const StyledCart = styled.div`
 				cursor: pointer;
 				background: inherit;
 				border-radius: 10px;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+				position: relative;
+				left: 10px;
+				top: 1px;
 				width: fit-content;
 				padding: 3px 10px;
-				margin-top: 3px;
 				font-weight: bold;
 				font-family: inherit;
 
@@ -163,7 +172,7 @@ const StyledCart = styled.div`
 				outline: none;
 				font-size: 1rem;
 				color: rgb(255, 255, 255);
-				background: rgb(145, 0, 0);
+				background: rgb(88, 0, 0);
 				font-weight: 300;
 			}
 		}

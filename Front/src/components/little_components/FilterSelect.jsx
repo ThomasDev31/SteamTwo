@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import useClickOutside from "../hooks/useClickOutside";
 
 const correspondances = {
 	name: "Name",
@@ -7,21 +8,6 @@ const correspondances = {
 	release_date: "Release Date",
 	rating: "Rating",
 };
-
-function useClickOutside(ref, handler) {
-	const handleClickOutside = (event) => {
-		if (ref.current && !ref.current.contains(event.target)) {
-			handler(event);
-		}
-	};
-
-	useEffect(() => {
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, [ref, handler]);
-}
 
 const FilterSelect = ({ value, onChange }) => {
 	const [isOpen, setIsOpen] = useState(false);

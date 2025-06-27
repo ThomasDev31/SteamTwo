@@ -5,8 +5,11 @@ import {
 	faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/logo.png";
+import { useContext } from "react";
+import { CartContext } from "./contexts/CartContext";
 
 const Header = () => {
+	const { toggleCart } = useContext(CartContext);
 	return (
 		<StyledHeader>
 			<div className="title-logo">
@@ -23,7 +26,7 @@ const Header = () => {
 				/>
 			</div>
 			<div className="cart">
-				<button>
+				<button onClick={toggleCart}>
 					<FontAwesomeIcon
 						icon={faCartShopping}
 						color="white"

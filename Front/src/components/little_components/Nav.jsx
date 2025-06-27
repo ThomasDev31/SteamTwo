@@ -38,7 +38,6 @@ const Nav = ({ category, setCategory }) => {
 const StyledNav = styled.nav`
 	top: 0;
 	left: 0;
-	z-index: 100;
 	padding: 20px 40px;
 	font-weight: 300;
 	.nav-section {

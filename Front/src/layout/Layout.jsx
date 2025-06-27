@@ -6,11 +6,16 @@ import { useState } from "react";
 
 const Layout = () => {
 	const [category, setCategory] = useState("");
-
+	const [active, setActive] = useState(false)
 	return (
 		<StyledLayout className="layout">
+			<div className="container-buger" onClick={()=> {setActive(!active)}}>
+				<div className="bar-burger"></div>
+				<div className="bar-burger"></div>
+				<div className="bar-burger"></div>
+			</div>
 			<Main category={category} />
-			<Nav category={category} setCategory={setCategory} />
+			<Nav category={category} setCategory={setCategory} active={active} setActive={setActive} />
 		</StyledLayout>
 	);
 };
@@ -21,9 +26,39 @@ const StyledLayout = styled.div`
 	color: white;
 	display: grid;
 	grid-template-columns: 1fr;
-
+	position: relative;
+	.container-buger{
+			width:40px;
+			height:40px;
+			flex-direction:column;
+			position:fixed;
+			bottom:10px;
+			right:10px;
+			display:flex;
+			z-index:100;
+			justify-content:center;
+			align-items:center;
+			gap:5px;
+			border-radius:50%;
+			background-color:white;
+			display:none;
+			.bar-burger{
+				border-bottom: 2px solid black;
+				width:20px;
+			}
+		}
 	@media (min-width: 700px) {
 		grid-template-columns: 300px auto;
+	}
+	@media (max-width: 700px ) {
+		.container-buger{
+			display:flex;
+			cursor: pointer;
+		}
+		.nav{
+			position:fixed;
+			top:0;
+		}
 	}
 `;
 

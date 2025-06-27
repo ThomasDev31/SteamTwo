@@ -46,7 +46,7 @@ const Cart = () => {
 								</div>
 							</div>
 							<button onClick={() => removeItemFromCart(item.id)}>
-								<i class="fa-solid fa-trash-can"></i>
+								<i className="fa-solid fa-trash-can"></i>
 							</button>
 						</div>
 					))}

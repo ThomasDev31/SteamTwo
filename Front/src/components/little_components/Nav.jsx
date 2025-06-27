@@ -4,9 +4,10 @@ import { navContent } from "../../utils";
 /*
  */
 
-const Nav = ({ category, setCategory }) => {
+const Nav = ({ category, setCategory, active, setActive }) => {
+	
 	return (
-		<StyledNav>
+		<StyledNav className={active? "active" : "" }>
 			{navContent.map((section) => (
 				<div key={section.sectionName} className="nav-section">
 					<h3>{section.sectionName}</h3>
@@ -32,6 +33,9 @@ const Nav = ({ category, setCategory }) => {
 					</ul>
 				</div>
 			))}
+			<div className={active? "cross active" : "cross"  }  onClick={() => {setActive(!active)}}>
+				X
+			</div>
 		</StyledNav>
 	);
 };
@@ -89,8 +93,46 @@ const StyledNav = styled.nav`
 			background-color: #f0f0f0;
 		}
 	}
+	.cross{
+			display:none;
+	}
 	@media (min-width: 700px) {
 		grid-row: 2 / -1;
+		
+	}
+	@media (max-width: 700px) { 
+		display:none;
+		&.active{
+		position:fixed;
+		top:0;
+		width:100%;
+		height:100%;
+		overflow-y:auto;
+		z-index:100;
+		background-color:white;
+		display:block;
+		}
+		
+		.nav-section{
+			flex-wrap:wrap;
+		}
+		&.active li,&.active  h3{
+			color:black;
+		}
+		h3{
+
+		}
+		.cross.active{
+			color:black;
+			position:fixed;
+			top:20px;
+			right:40px;
+			cursor:pointer;
+			font-size:2rem;
+			font-weight:500;
+			font-family:inherit;
+			display:block;
+		}
 	}
 `;
 

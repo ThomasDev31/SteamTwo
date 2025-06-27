@@ -67,7 +67,6 @@ const rawgParams = {
 				return { error: "Aucun jeu n'a été trouvé ", gameData: null };
 			}
 			return { gameData, error: null };
-
 		} catch (error) {
 			console.error("Erreur getGame", error.message)
 			return { error: error.message, gameData: null };

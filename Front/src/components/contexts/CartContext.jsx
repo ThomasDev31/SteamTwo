@@ -1,19 +1,12 @@
 import { createContext, useEffect } from "react";
 import { useState } from "react";
 
-const initialCart = [
-	{ id: 1, title: "Mario Kart", price: 29.99, quantity: 1 },
-	{ id: 2, title: "Super Mario", price: 49.99, quantity: 1 },
-	{ id: 3, title: "Mario Kart", price: 29.99, quantity: 1 },
-	{ id: 4, title: "Super Mario", price: 49.99, quantity: 1 },
-];
-
 export const CartContext = createContext([]);
 
 export const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState(() => {
 		const savedCart = localStorage.getItem("cart");
-		return savedCart ? JSON.parse(savedCart) : initialCart;
+		return savedCart ? JSON.parse(savedCart) : [];
 	});
 	const [isOpen, setIsOpen] = useState(false);
 

@@ -6,7 +6,8 @@ import {
 	faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/logo.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { CartContext } from "./contexts/CartContext";
 import rawgParams from "../api/rawgParams";
 const apiKey = import.meta.env.VITE_KEY;
 
@@ -15,6 +16,7 @@ const Header = () => {
 	const [games, setGames] = useState([]);
 	const [modalOpen, setModalOpen] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const { toggleCart } = useContext(CartContext);
 
 	useEffect(() => {
 		if (searchedEntries.length < 2) {

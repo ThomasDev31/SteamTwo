@@ -24,7 +24,7 @@ function Error404() {
                 </div>
                 <div className={`container-modal ${active ? "active" : ""}`}>
                     <div>
-                        <h1>Hello petit coquin</h1>
+                        <h1>Hello petit coquin !</h1>
                         <img src="../src\assets\2112.gif" alt="" />
                     </div>
                 </div>

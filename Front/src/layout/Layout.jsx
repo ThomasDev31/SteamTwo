@@ -11,9 +11,8 @@ const Layout = () => {
 		<StyledLayout className="layout">
 			<Main category={category} />
 			<Nav category={category} setCategory={setCategory} />
-			<Cart />
 		</StyledLayout>
-	); 
+	);
 };
 
 const StyledLayout = styled.div`

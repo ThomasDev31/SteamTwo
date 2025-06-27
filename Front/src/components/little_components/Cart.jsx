@@ -70,6 +70,10 @@ const StyledCart = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 
+	h2 {
+		color: white;
+	}
+
 	&.open {
 		right: 0;
 		z-index: 20;

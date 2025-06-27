@@ -19,6 +19,7 @@ const Nav = ({ category, setCategory }) => {
 										section: section.sectionName,
 										cat: category.title,
 										id: category.id,
+										slug: category.slug,
 									}));
 								}}
 							>

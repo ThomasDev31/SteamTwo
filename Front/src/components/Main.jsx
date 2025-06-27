@@ -15,11 +15,6 @@ const calls = [
 	{ name: "Best of the year", call: rawgCalls.getAllGamesBestOfYear },
 	{ name: "Popular in 2025", call: rawgCalls.getAllGamesMostPopularOfYear },
 	{ name: "All time top", call: rawgCalls.getAllGamesBestOfTime },
-	{
-		name: "Platforms",
-		call: (plat) => rawgCalls.getAllGamesByPlatform(plat),
-	},
-	{ name: "Genres", call: (genre) => rawgCalls.getAllGamesByCategory(genre) },
 ];
 
 const Main = ({ category }) => {
@@ -30,7 +25,6 @@ const Main = ({ category }) => {
 	const [filter, setFilter] = useState("popularity");
 
 	const filteredDatas = filterBy(datas, filter);
-	console.log("Filtered data: ", filteredDatas);
 
 	useEffect(() => {
 		let matched;
@@ -66,7 +60,7 @@ const Main = ({ category }) => {
 			if (functionData.name === "Platforms") {
 				param = category?.id;
 			} else if (functionData.name === "Genres") {
-				param = category?.cat?.toLowerCase();
+				param = category?.slug?.toLowerCase();
 			}
 
 			const response = functionData.needsParam
@@ -84,7 +78,7 @@ const Main = ({ category }) => {
 	useEffect(() => {
 		if (functionData) {
 			fetchdata();
-			console.log(datas);
+			
 		}
 	}, [functionData]);
 	function GoToGamePage(id) {

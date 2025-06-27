@@ -6,7 +6,7 @@ function Carrousel({ image, video }) {
     const [direction, setDirection] = useState("next");
     const items = [...image, ...video];
     const currentItem = items[current];
-    console.log(items);
+   
     const next = () => {
         setDirection("next");
         setCurrent((prev) => (prev + 1) % items.length);
@@ -100,6 +100,7 @@ const Carousel = styled.div`
                 height: 100%;
                 object-fit: cover;
                 border-radius: 25px;
+                object-position:center;
             }
             &.active {
                 opacity: 1;
@@ -177,6 +178,17 @@ const Carousel = styled.div`
             transform: translateX(0);
             opacity: 1;
         }
+    }
+     @media screen and (max-width: 620px) {
+        width:100%;
+            .carousel-value {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+                display: flex;
+                border-radius: 25px;
+            }
     }
 `;
 export default Carrousel;

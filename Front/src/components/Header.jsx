@@ -10,6 +10,7 @@ import { useEffect, useState, useContext } from "react";
 import { CartContext } from "./contexts/CartContext";
 import rawgParams from "../api/rawgParams";
 const apiKey = import.meta.env.VITE_KEY;
+import { Navigate, useNavigate } from "react-router";
 
 const Header = () => {
 	const [searchedEntries, setSearchedEntries] = useState("");
@@ -36,8 +37,6 @@ const Header = () => {
 	async function SearchTheGames(name) {
 		setIsLoading(true);
 		console.log("searchedEntries : ", searchedEntries);
-		// FORCER L'OUVERTURE pour tester
-		//setModalOpen(true);
 		try {
 			const response = await rawgParams.getGameBySearch(name);
 
@@ -58,10 +57,16 @@ const Header = () => {
 		}
 	}
 
-	function closeModal() {
+	function CloseModal() {
 		setModalOpen(false);
 		setSearchedEntries("");
 		setGames([]);
+	}
+
+	let navigate = useNavigate();
+
+	function GoToGameDetail(id){
+		navigate(`/game/${id}`);
 	}
 
 	return (
@@ -92,7 +97,7 @@ const Header = () => {
 			{/* ICI La logique de la modal qui s'ouvre comme ça quand on a une
 					recherche en cours */}
 			{modalOpen && (
-				<div className="overlay_modal" onClick={closeModal}>
+				<div className="overlay_modal" onClick={CloseModal}>
 					<div className="search_modal">
 						{isLoading && (
 							<div className="search_loading">
@@ -107,7 +112,7 @@ const Header = () => {
 								<div className="search_results">
 									{games.results.map((game) => {
 										return (
-											<div key={game.slug} className="game_container">
+											<div key={game.slug} className="game_container" onClick={() => {GoToGameDetail(game.id)}}>
 												{game.background_image && (
 													<img
 														src={game.background_image}
@@ -214,7 +219,6 @@ const StyledHeader = styled.header`
 		width: 90%;
 		max-width: 600px;
 		overflow-y: auto;
-		box-shadow: 0 4px 20px rgb(32, 32, 32);
 	}
 
 	.search_loading {
